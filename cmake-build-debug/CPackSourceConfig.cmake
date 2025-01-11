@@ -34,7 +34,7 @@ set(CPACK_IGNORE_FILES "/CVS/;/\\.svn/;/\\.bzr/;/\\.hg/;/\\.git/;\\.swp\$;\\.#;/
 set(CPACK_INSTALLED_DIRECTORIES "/Users/danilkasirin/projects_C/5sem/pl/matur-pl;/")
 set(CPACK_INSTALL_CMAKE_PROJECTS "")
 set(CPACK_INSTALL_PREFIX "/usr/local")
-set(CPACK_MODULE_PATH "/opt/homebrew/opt/llvm@15/lib/cmake/llvm")
+set(CPACK_MODULE_PATH "")
 set(CPACK_NSIS_DISPLAY_NAME "matur_pl 0.1.1")
 set(CPACK_NSIS_INSTALLER_ICON_CODE "")
 set(CPACK_NSIS_INSTALLER_MUI_ICON_CODE "")

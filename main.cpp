@@ -6,8 +6,6 @@
 #include "llvm-backend/IRGenerator.h"
 #include "parser/Parser.h"
 
-#include <llvm/Support/TargetSelect.h>
-
 
 int main(int argc, char* argv[]) {
   if (argc < 2) {
@@ -20,9 +18,6 @@ int main(int argc, char* argv[]) {
   input_buffer << file.rdbuf();
   std::string code = input_buffer.str();
   file.close();
-
-  llvm::InitializeNativeTarget();
-  llvm::InitializeNativeTargetAsmPrinter();
 
   Parser parser(code);
   auto ast = parser.parse();

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "ASTNode.h"
+#include "../ast/ASTNode.h"
 
 std::string generateIR(const std::vector<std::unique_ptr<ASTNode>>& ast);
 

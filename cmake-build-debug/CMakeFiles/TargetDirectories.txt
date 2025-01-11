@@ -1,6 +1,3 @@
-/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CMakeFiles/intrinsics_gen.dir
-/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CMakeFiles/omp_gen.dir
-/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CMakeFiles/acc_gen.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CMakeFiles/matur_pl.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CMakeFiles/package.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CMakeFiles/package_source.dir
@@ -20,3 +17,11 @@
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser/CMakeFiles/package_source.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser/CMakeFiles/edit_cache.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser/CMakeFiles/rebuild_cache.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend/CMakeFiles/llvm-backend.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend/CMakeFiles/intrinsics_gen.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend/CMakeFiles/omp_gen.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend/CMakeFiles/acc_gen.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend/CMakeFiles/package.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend/CMakeFiles/package_source.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend/CMakeFiles/edit_cache.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend/CMakeFiles/rebuild_cache.dir

@@ -17,6 +17,7 @@
       <config projectName="matur_pl" targetName="intrinsics_gen" />
       <config projectName="matur_pl" targetName="lexer" />
       <config projectName="matur_pl" targetName="parser" />
+      <config projectName="matur_pl" targetName="llvm-backend" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -26,64 +27,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5f549d8-70d6-4289-87c0-482e76c7e5fa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ast/ASTNode.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ast/PrintAST.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ast/VariableDeclAST.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lexer/Lexer.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lexer/Lexer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lexer/Token.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/llvm-backend/IRGenerator.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/llvm-backend/IRGenerator.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/llvm-backend/JITExecutor.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/llvm-backend/JITExecutor.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/Parser.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/Parser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cache-v2" beforeDir="false" afterPath="$PROJECT_DIR$/ast/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" afterPath="$PROJECT_DIR$/lexer/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" beforeDir="false" afterPath="$PROJECT_DIR$/parser/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-90f2d14bec102c0ddd79.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-55bd2a2c41a40a955607.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-f679146dce1e264e6518.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2025-01-11T14-32-39-0668.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-acc_gen-Debug-bdaae8295cbd5c375204.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-intrinsics_gen-Debug-1edc5bf45c84c5db5de9.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-matur_pl-Debug-3a4c1320ab66798b2ca3.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-omp_gen-Debug-f30db5fa8c82ce420980.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-0ecab7514e1966f11756.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CMakeSystem.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdC/CMakeCCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/3.26.4/CompilerIdCXX/CMakeCXXCompilerId.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/matur_pl.dir/main.cpp.o" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CPackConfig.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CPackSourceConfig.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/matur_pl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/script.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lexer.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/llvm.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-8fc32eb39012faf24d75.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-672d21735c7a0dea95a8.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-16cf4b17e4926200080c.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2025-01-11T15-38-25-0695.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-acc_gen-Debug-dff6153b568fe3b07878.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-intrinsics_gen-Debug-1229a105aa2dabfcc599.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-lexer-Debug-42e6c1232334fe3e4102.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-matur_pl-Debug-7c0bd161dedda65e9954.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-omp_gen-Debug-885eb5a71f8b40394dc0.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-parser-Debug-6ad071382f1d95d9432a.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/matur_pl.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/matur_pl.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CPackConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CPackConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CPackSourceConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CPackSourceConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lexer/liblexer.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lexer/liblexer.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/matur_pl" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/matur_pl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/parser/libparser.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/parser/libparser.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/script.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/llvm-backend/IRGenerator.h" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/IRGenerator.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/llvm-backend/JITExecutor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/JITExecutor.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/llvm-backend/JITExecutor.h" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/JITExecutor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parser.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/CMakeLists.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,6 +146,11 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="llvm-backend" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="matur_pl" TARGET_NAME="llvm-backend" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="matur_pl" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="script.txt" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="matur_pl" TARGET_NAME="matur_pl" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="matur_pl" RUN_TARGET_NAME="matur_pl">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -187,6 +169,7 @@
     <list>
       <item itemvalue="CMake Application.acc_gen" />
       <item itemvalue="CMake Application.intrinsics_gen" />
+      <item itemvalue="CMake Application.llvm-backend" />
       <item itemvalue="CMake Application.matur_pl" />
       <item itemvalue="CMake Application.omp_gen" />
       <item itemvalue="CMake Application.lexer" />
@@ -207,7 +190,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1736605907847</updated>
-      <workItem from="1736605909078" duration="3990000" />
+      <workItem from="1736605909078" duration="5308000" />
     </task>
     <servers />
   </component>

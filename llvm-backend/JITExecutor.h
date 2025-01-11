@@ -3,6 +3,6 @@
 
 #include <string>
 
-int executeIR(const std::string& irCode);
+uint64_t executeIR(const std::string& irCode);
 
 #endif // JIT_EXECUTOR_H

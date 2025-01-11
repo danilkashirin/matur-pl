@@ -7,7 +7,11 @@
 #include <llvm/ExecutionEngine/GenericValue.h>
 #include <iostream>
 
-int executeIR(const std::string& irCode) {
+uint64_t executeIR(const std::string& irCode) {
+
+  llvm::InitializeNativeTarget();
+  llvm::InitializeNativeTargetAsmPrinter();
+
   llvm::LLVMContext context;
   llvm::SMDiagnostic err;
 
@@ -40,8 +44,6 @@ int executeIR(const std::string& irCode) {
   std::vector<llvm::GenericValue> args;
   llvm::GenericValue result = engine->runFunction(mainFunc, args);
 
-  std::cout << "Result: " << result.IntVal.getSExtValue() << "\n";
-
   delete engine;
-  return 0;
+  return result.IntVal.getSExtValue();
 }
