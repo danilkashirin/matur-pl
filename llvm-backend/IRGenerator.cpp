@@ -1,11 +1,12 @@
+#include "IRGenerator.h"
 #include <iostream>
 #include <map>
-#include <sstream>
+#include <stdexcept>
 #include "llvm/IR/IRBuilder.h"
 #include "llvm/IR/LLVMContext.h"
 #include "llvm/IR/Module.h"
-
-#include "parser.h"
+#include "PrintAST.h"
+#include "VariableDeclAST.h"
 
 std::string generateIR(const std::vector<std::unique_ptr<ASTNode>>& ast) {
   llvm::LLVMContext context;
@@ -13,8 +14,7 @@ std::string generateIR(const std::vector<std::unique_ptr<ASTNode>>& ast) {
   llvm::IRBuilder<> builder(context);
 
   llvm::FunctionType* funcType = llvm::FunctionType::get(builder.getInt32Ty(), false);
-  llvm::Function
-      * mainFunction = llvm::Function::Create(funcType, llvm::Function::ExternalLinkage, "main", module.get());
+  llvm::Function* mainFunction = llvm::Function::Create(funcType, llvm::Function::ExternalLinkage, "main", module.get());
   llvm::BasicBlock* entry = llvm::BasicBlock::Create(context, "entry", mainFunction);
   builder.SetInsertPoint(entry);
 

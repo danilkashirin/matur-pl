@@ -703,7 +703,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "1"
+			"value" : "4"
 		},
 		{
 			"name" : "CMAKE_OBJCOPY",
@@ -2132,6 +2132,42 @@
 			],
 			"type" : "INTERNAL",
 			"value" : "1"
+		},
+		{
+			"name" : "llvm-backend_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for llvm-backend."
+				}
+			],
+			"type" : "PATH",
+			"value" : "llvm-backend_DIR-NOTFOUND"
+		},
+		{
+			"name" : "llvm_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for llvm."
+				}
+			],
+			"type" : "PATH",
+			"value" : "llvm_DIR-NOTFOUND"
+		},
+		{
+			"name" : "llvm_backend_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for llvm_backend."
+				}
+			],
+			"type" : "PATH",
+			"value" : "llvm_backend_DIR-NOTFOUND"
 		},
 		{
 			"name" : "matur_pl_BINARY_DIR",

@@ -300,6 +300,15 @@
 		{
 			"isExternal" : true,
 			"path" : "/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Templates/CPackConfig.cmake.in"
+		},
+		{
+			"path" : "ast/CMakeLists.txt"
+		},
+		{
+			"path" : "lexer/CMakeLists.txt"
+		},
+		{
+			"path" : "parser/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",

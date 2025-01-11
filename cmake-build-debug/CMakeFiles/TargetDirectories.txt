@@ -6,3 +6,17 @@
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CMakeFiles/package_source.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/ast/CMakeFiles/package.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/ast/CMakeFiles/package_source.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/ast/CMakeFiles/edit_cache.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/ast/CMakeFiles/rebuild_cache.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/lexer/CMakeFiles/lexer.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/lexer/CMakeFiles/package.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/lexer/CMakeFiles/package_source.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/lexer/CMakeFiles/edit_cache.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/lexer/CMakeFiles/rebuild_cache.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser/CMakeFiles/parser.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser/CMakeFiles/package.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser/CMakeFiles/package_source.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser/CMakeFiles/edit_cache.dir
+/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser/CMakeFiles/rebuild_cache.dir
