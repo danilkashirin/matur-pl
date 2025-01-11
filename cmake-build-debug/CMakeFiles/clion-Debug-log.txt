@@ -1,0 +1,13 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja -S /Users/danilkasirin/projects_C/5sem/pl/matur-pl -B /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug
+-- Performing Test HAVE_FFI_CALL
+-- Performing Test HAVE_FFI_CALL - Success
+-- Found FFI: /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libffi.tbd  
+-- Performing Test Terminfo_LINKABLE
+-- Performing Test Terminfo_LINKABLE - Success
+-- Found Terminfo: /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurses.tbd  
+-- Found ZLIB: /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libz.tbd (found version "1.2.12")  
+-- Found zstd: /opt/homebrew/lib/libzstd.dylib  
+-- Found LibXml2: /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libxml2.tbd (found version "2.9.13") 
+-- Configuring done (1.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug
