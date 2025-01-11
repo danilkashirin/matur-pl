@@ -1,8 +1,9 @@
 #include "Lexer.h"
 #include <cctype>
 #include <stdexcept>
+#include <utility>
 
-Lexer::Lexer(const std::string& input) : input(input), position(0) {}
+Lexer::Lexer(std::string  input) : input(std::move(input)), position(0) {}
 
 Token Lexer::getNextToken() {
   skipWhitespace();

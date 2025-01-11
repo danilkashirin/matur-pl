@@ -23,5 +23,5 @@ int main(int argc, char* argv[]) {
   auto ast = parser.parse();
   std::string irCode = generateIR(ast);
 
-  return executeIR(irCode);
+  return static_cast<int>(executeIR(irCode));
 }

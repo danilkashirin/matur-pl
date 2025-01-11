@@ -3,15 +3,16 @@
 
 #include "ASTNode.h"
 #include <string>
+#include <utility>
 
 class VariableDeclAST : public ASTNode {
  public:
-  VariableDeclAST(const std::string& type,const std::string& name, int64_t value)
-      : type(type), name(name), value(value) {}
+  VariableDeclAST(std::string  type,const std::string& name, int64_t value)
+      : type(std::move(type)), name(name), value(value) {}
 
-  const std::string& getType() const { return type; }
-  const std::string& getName() const { return name; }
-  int64_t getValue() const { return value; }
+  [[nodiscard]] const std::string& getType() const { return type; }
+  [[nodiscard]] const std::string& getName() const { return name; }
+  [[nodiscard]] int64_t getValue() const { return value; }
 
  private:
   std::string type;

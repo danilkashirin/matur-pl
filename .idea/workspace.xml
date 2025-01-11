@@ -27,40 +27,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5f549d8-70d6-4289-87c0-482e76c7e5fa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/a.out" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cache-v2-8fc32eb39012faf24d75.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-672d21735c7a0dea95a8.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-16cf4b17e4926200080c.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2025-01-11T15-38-25-0695.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-acc_gen-Debug-dff6153b568fe3b07878.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-intrinsics_gen-Debug-1229a105aa2dabfcc599.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-lexer-Debug-42e6c1232334fe3e4102.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-matur_pl-Debug-7c0bd161dedda65e9954.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-omp_gen-Debug-885eb5a71f8b40394dc0.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-parser-Debug-6ad071382f1d95d9432a.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/matur_pl.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/matur_pl.dir/main.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/rules.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CPackConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CPackConfig.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CPackSourceConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CPackSourceConfig.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/cmake_install.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lexer/liblexer.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lexer/liblexer.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/matur_pl" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/matur_pl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/parser/libparser.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/parser/libparser.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/script.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llvm-backend/IRGenerator.h" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/IRGenerator.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llvm-backend/JITExecutor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/JITExecutor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llvm-backend/JITExecutor.h" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/JITExecutor.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ast/VariableDeclAST.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/VariableDeclAST.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lexer/Lexer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lexer/Lexer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lexer/Lexer.h" beforeDir="false" afterPath="$PROJECT_DIR$/lexer/Lexer.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +159,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1736605907847</updated>
-      <workItem from="1736605909078" duration="5308000" />
+      <workItem from="1736605909078" duration="5641000" />
     </task>
     <servers />
   </component>
