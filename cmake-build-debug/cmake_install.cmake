@@ -1,4 +1,4 @@
-# Install script for directory: /Users/danilkasirin/projects_C/5sem/pl/matur-pl
+# Install script for directory: /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,22 +39,27 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/ast/cmake_install.cmake")
+  include("/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/ast/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/lexer/cmake_install.cmake")
+  include("/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/lexer/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser/cmake_install.cmake")
+  include("/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/parser/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend/cmake_install.cmake")
+  include("/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/llvm-backend/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/vm/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -65,5 +70,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

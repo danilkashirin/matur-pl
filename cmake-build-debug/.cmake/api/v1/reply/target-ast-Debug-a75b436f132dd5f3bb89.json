@@ -1,0 +1,70 @@
+{
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library"
+		],
+		"files" : 
+		[
+			"ast/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 3,
+				"parent" : 0
+			}
+		]
+	},
+	"id" : "ast::@9d340e1cee0ac356ce42",
+	"name" : "ast",
+	"paths" : 
+	{
+		"build" : "ast",
+		"source" : "ast"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Header Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "ast/CompareOpNode.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ast/ForNode.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ast/IfNode.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "ast/FunctionAST.h",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "INTERFACE_LIBRARY"
+}

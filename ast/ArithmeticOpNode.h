@@ -1,0 +1,8 @@
+//
+// Created by Данил Каширин on 12.01.2025.
+//
+
+#ifndef MATUR_PL_AST_ARITHMETICOPNODE_H_
+#define MATUR_PL_AST_ARITHMETICOPNODE_H_
+
+#endif //MATUR_PL_AST_ARITHMETICOPNODE_H_

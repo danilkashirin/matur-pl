@@ -39,7 +39,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/
+cmake_ninja_workdir = /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/
 # =============================================================================
 # Object build statements for EXECUTABLE target matur_pl
 
@@ -47,12 +47,12 @@ cmake_ninja_workdir = /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-buil
 #############################################
 # Order-only phony target for matur_pl
 
-build cmake_object_order_depends_target_matur_pl: phony || cmake_object_order_depends_target_lexer cmake_object_order_depends_target_llvm-backend cmake_object_order_depends_target_parser
+build cmake_object_order_depends_target_matur_pl: phony || ast/ast cmake_object_order_depends_target_lexer cmake_object_order_depends_target_llvm-backend cmake_object_order_depends_target_parser cmake_object_order_depends_target_vm
 
-build CMakeFiles/matur_pl.dir/main.cpp.o: CXX_COMPILER__matur_pl_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl/main.cpp || cmake_object_order_depends_target_matur_pl
+build CMakeFiles/matur_pl.dir/main.cpp.o: CXX_COMPILER__matur_pl_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/main.cpp || cmake_object_order_depends_target_matur_pl
   DEP_FILE = CMakeFiles/matur_pl.dir/main.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/include -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/parser -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/ast -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/lexer -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend/../ast -isystem /opt/homebrew/include
+  INCLUDES = -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/include -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/parser -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/ast -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/lexer -I/opt/homebrew/opt/llvm@15/include -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend/../ast -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/vm -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/matur_pl.dir
   OBJECT_FILE_DIR = CMakeFiles/matur_pl.dir
 
@@ -64,10 +64,10 @@ build CMakeFiles/matur_pl.dir/main.cpp.o: CXX_COMPILER__matur_pl_unscanned_Debug
 #############################################
 # Link the executable matur_pl
 
-build matur_pl: CXX_EXECUTABLE_LINKER__matur_pl_Debug CMakeFiles/matur_pl.dir/main.cpp.o | parser/libparser.a llvm-backend/libllvm-backend.a lexer/liblexer.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcJIT.a /opt/homebrew/opt/llvm@15/lib/libLLVMPasses.a /opt/homebrew/opt/llvm@15/lib/libLLVMCoroutines.a /opt/homebrew/opt/llvm@15/lib/libLLVMipo.a /opt/homebrew/opt/llvm@15/lib/libLLVMFrontendOpenMP.a /opt/homebrew/opt/llvm@15/lib/libLLVMIRReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMAsmParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMLinker.a /opt/homebrew/opt/llvm@15/lib/libLLVMObjCARCOpts.a /opt/homebrew/opt/llvm@15/lib/libLLVMVectorize.a /opt/homebrew/opt/llvm@15/lib/libLLVMInstrumentation.a /opt/homebrew/opt/llvm@15/lib/libLLVMJITLink.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCJIT.a /opt/homebrew/opt/llvm@15/lib/libLLVMInterpreter.a /opt/homebrew/opt/llvm@15/lib/libLLVMExecutionEngine.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcTargetProcess.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcShared.a /opt/homebrew/opt/llvm@15/lib/libLLVMRuntimeDyld.a /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libffi.tbd /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64CodeGen.a /opt/homebrew/opt/llvm@15/lib/libLLVMAsmPrinter.a /opt/homebrew/opt/llvm@15/lib/libLLVMGlobalISel.a /opt/homebrew/opt/llvm@15/lib/libLLVMSelectionDAG.a /opt/homebrew/opt/llvm@15/lib/libLLVMCodeGen.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitWriter.a /opt/homebrew/opt/llvm@15/lib/libLLVMTarget.a /opt/homebrew/opt/llvm@15/lib/libLLVMScalarOpts.a /opt/homebrew/opt/llvm@15/lib/libLLVMAggressiveInstCombine.a /opt/homebrew/opt/llvm@15/lib/libLLVMInstCombine.a /opt/homebrew/opt/llvm@15/lib/libLLVMTransformUtils.a /opt/homebrew/opt/llvm@15/lib/libLLVMAnalysis.a /opt/homebrew/opt/llvm@15/lib/libLLVMProfileData.a /opt/homebrew/opt/llvm@15/lib/libLLVMSymbolize.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoDWARF.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoPDB.a /opt/homebrew/opt/llvm@15/lib/libLLVMObject.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMTextAPI.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoMSF.a /opt/homebrew/opt/llvm@15/lib/libLLVMCFGuard.a /opt/homebrew/opt/llvm@15/lib/libLLVMCore.a /opt/homebrew/opt/llvm@15/lib/libLLVMRemarks.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitstreamReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64AsmParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Disassembler.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Desc.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCDisassembler.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Info.a /opt/homebrew/opt/llvm@15/lib/libLLVMMC.a /opt/homebrew/opt/llvm@15/lib/libLLVMBinaryFormat.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoCodeView.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Utils.a /opt/homebrew/opt/llvm@15/lib/libLLVMSupport.a /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libz.tbd /opt/homebrew/lib/libzstd.dylib /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurses.tbd /opt/homebrew/opt/llvm@15/lib/libLLVMDemangle.a || lexer/liblexer.a llvm-backend/libllvm-backend.a parser/libparser.a
+build matur_pl: CXX_EXECUTABLE_LINKER__matur_pl_Debug CMakeFiles/matur_pl.dir/main.cpp.o | parser/libparser.a llvm-backend/libllvm-backend.a vm/libvm.a lexer/liblexer.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcJIT.a /opt/homebrew/opt/llvm@15/lib/libLLVMPasses.a /opt/homebrew/opt/llvm@15/lib/libLLVMCoroutines.a /opt/homebrew/opt/llvm@15/lib/libLLVMipo.a /opt/homebrew/opt/llvm@15/lib/libLLVMFrontendOpenMP.a /opt/homebrew/opt/llvm@15/lib/libLLVMIRReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMAsmParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMLinker.a /opt/homebrew/opt/llvm@15/lib/libLLVMObjCARCOpts.a /opt/homebrew/opt/llvm@15/lib/libLLVMVectorize.a /opt/homebrew/opt/llvm@15/lib/libLLVMInstrumentation.a /opt/homebrew/opt/llvm@15/lib/libLLVMJITLink.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCJIT.a /opt/homebrew/opt/llvm@15/lib/libLLVMInterpreter.a /opt/homebrew/opt/llvm@15/lib/libLLVMExecutionEngine.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcTargetProcess.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcShared.a /opt/homebrew/opt/llvm@15/lib/libLLVMRuntimeDyld.a /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libffi.tbd /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64CodeGen.a /opt/homebrew/opt/llvm@15/lib/libLLVMAsmPrinter.a /opt/homebrew/opt/llvm@15/lib/libLLVMGlobalISel.a /opt/homebrew/opt/llvm@15/lib/libLLVMSelectionDAG.a /opt/homebrew/opt/llvm@15/lib/libLLVMCodeGen.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitWriter.a /opt/homebrew/opt/llvm@15/lib/libLLVMTarget.a /opt/homebrew/opt/llvm@15/lib/libLLVMScalarOpts.a /opt/homebrew/opt/llvm@15/lib/libLLVMAggressiveInstCombine.a /opt/homebrew/opt/llvm@15/lib/libLLVMInstCombine.a /opt/homebrew/opt/llvm@15/lib/libLLVMTransformUtils.a /opt/homebrew/opt/llvm@15/lib/libLLVMAnalysis.a /opt/homebrew/opt/llvm@15/lib/libLLVMProfileData.a /opt/homebrew/opt/llvm@15/lib/libLLVMSymbolize.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoDWARF.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoPDB.a /opt/homebrew/opt/llvm@15/lib/libLLVMObject.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMTextAPI.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoMSF.a /opt/homebrew/opt/llvm@15/lib/libLLVMCFGuard.a /opt/homebrew/opt/llvm@15/lib/libLLVMCore.a /opt/homebrew/opt/llvm@15/lib/libLLVMRemarks.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitstreamReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64AsmParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Disassembler.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Desc.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCDisassembler.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Info.a /opt/homebrew/opt/llvm@15/lib/libLLVMMC.a /opt/homebrew/opt/llvm@15/lib/libLLVMBinaryFormat.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoCodeView.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Utils.a /opt/homebrew/opt/llvm@15/lib/libLLVMSupport.a /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libz.tbd /opt/homebrew/lib/libzstd.dylib /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurses.tbd /opt/homebrew/opt/llvm@15/lib/libLLVMDemangle.a || ast/ast lexer/liblexer.a llvm-backend/libllvm-backend.a parser/libparser.a vm/libvm.a
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
-  LINK_FLAGS = -L/usr/local/opt/llvm/lib
-  LINK_LIBRARIES = parser/libparser.a  llvm-backend/libllvm-backend.a  lexer/liblexer.a  /opt/homebrew/opt/llvm@15/lib/libLLVMOrcJIT.a  /opt/homebrew/opt/llvm@15/lib/libLLVMPasses.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCoroutines.a  /opt/homebrew/opt/llvm@15/lib/libLLVMipo.a  /opt/homebrew/opt/llvm@15/lib/libLLVMFrontendOpenMP.a  /opt/homebrew/opt/llvm@15/lib/libLLVMIRReader.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAsmParser.a  /opt/homebrew/opt/llvm@15/lib/libLLVMLinker.a  /opt/homebrew/opt/llvm@15/lib/libLLVMObjCARCOpts.a  /opt/homebrew/opt/llvm@15/lib/libLLVMVectorize.a  /opt/homebrew/opt/llvm@15/lib/libLLVMInstrumentation.a  /opt/homebrew/opt/llvm@15/lib/libLLVMJITLink.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMCJIT.a  /opt/homebrew/opt/llvm@15/lib/libLLVMInterpreter.a  /opt/homebrew/opt/llvm@15/lib/libLLVMExecutionEngine.a  /opt/homebrew/opt/llvm@15/lib/libLLVMOrcTargetProcess.a  /opt/homebrew/opt/llvm@15/lib/libLLVMOrcShared.a  /opt/homebrew/opt/llvm@15/lib/libLLVMRuntimeDyld.a  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libffi.tbd  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64CodeGen.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAsmPrinter.a  /opt/homebrew/opt/llvm@15/lib/libLLVMGlobalISel.a  /opt/homebrew/opt/llvm@15/lib/libLLVMSelectionDAG.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCodeGen.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBitWriter.a  /opt/homebrew/opt/llvm@15/lib/libLLVMTarget.a  /opt/homebrew/opt/llvm@15/lib/libLLVMScalarOpts.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAggressiveInstCombine.a  /opt/homebrew/opt/llvm@15/lib/libLLVMInstCombine.a  /opt/homebrew/opt/llvm@15/lib/libLLVMTransformUtils.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAnalysis.a  /opt/homebrew/opt/llvm@15/lib/libLLVMProfileData.a  /opt/homebrew/opt/llvm@15/lib/libLLVMSymbolize.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoDWARF.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoPDB.a  /opt/homebrew/opt/llvm@15/lib/libLLVMObject.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBitReader.a  /opt/homebrew/opt/llvm@15/lib/libLLVMTextAPI.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoMSF.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCFGuard.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCore.a  /opt/homebrew/opt/llvm@15/lib/libLLVMRemarks.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBitstreamReader.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64AsmParser.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMCParser.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Disassembler.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Desc.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMCDisassembler.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Info.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMC.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBinaryFormat.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoCodeView.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Utils.a  /opt/homebrew/opt/llvm@15/lib/libLLVMSupport.a  -lm  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libz.tbd  /opt/homebrew/lib/libzstd.dylib  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurses.tbd  /opt/homebrew/opt/llvm@15/lib/libLLVMDemangle.a
+  LINK_FLAGS = -L/opt/homebrew/Cellar/llvm@15/15.0.7/lib -L/usr/local/opt/llvm/lib
+  LINK_LIBRARIES = parser/libparser.a  llvm-backend/libllvm-backend.a  vm/libvm.a  lexer/liblexer.a  /opt/homebrew/opt/llvm@15/lib/libLLVMOrcJIT.a  /opt/homebrew/opt/llvm@15/lib/libLLVMPasses.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCoroutines.a  /opt/homebrew/opt/llvm@15/lib/libLLVMipo.a  /opt/homebrew/opt/llvm@15/lib/libLLVMFrontendOpenMP.a  /opt/homebrew/opt/llvm@15/lib/libLLVMIRReader.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAsmParser.a  /opt/homebrew/opt/llvm@15/lib/libLLVMLinker.a  /opt/homebrew/opt/llvm@15/lib/libLLVMObjCARCOpts.a  /opt/homebrew/opt/llvm@15/lib/libLLVMVectorize.a  /opt/homebrew/opt/llvm@15/lib/libLLVMInstrumentation.a  /opt/homebrew/opt/llvm@15/lib/libLLVMJITLink.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMCJIT.a  /opt/homebrew/opt/llvm@15/lib/libLLVMInterpreter.a  /opt/homebrew/opt/llvm@15/lib/libLLVMExecutionEngine.a  /opt/homebrew/opt/llvm@15/lib/libLLVMOrcTargetProcess.a  /opt/homebrew/opt/llvm@15/lib/libLLVMOrcShared.a  /opt/homebrew/opt/llvm@15/lib/libLLVMRuntimeDyld.a  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libffi.tbd  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64CodeGen.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAsmPrinter.a  /opt/homebrew/opt/llvm@15/lib/libLLVMGlobalISel.a  /opt/homebrew/opt/llvm@15/lib/libLLVMSelectionDAG.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCodeGen.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBitWriter.a  /opt/homebrew/opt/llvm@15/lib/libLLVMTarget.a  /opt/homebrew/opt/llvm@15/lib/libLLVMScalarOpts.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAggressiveInstCombine.a  /opt/homebrew/opt/llvm@15/lib/libLLVMInstCombine.a  /opt/homebrew/opt/llvm@15/lib/libLLVMTransformUtils.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAnalysis.a  /opt/homebrew/opt/llvm@15/lib/libLLVMProfileData.a  /opt/homebrew/opt/llvm@15/lib/libLLVMSymbolize.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoDWARF.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoPDB.a  /opt/homebrew/opt/llvm@15/lib/libLLVMObject.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBitReader.a  /opt/homebrew/opt/llvm@15/lib/libLLVMTextAPI.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoMSF.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCFGuard.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCore.a  /opt/homebrew/opt/llvm@15/lib/libLLVMRemarks.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBitstreamReader.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64AsmParser.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMCParser.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Disassembler.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Desc.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMCDisassembler.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Info.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMC.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBinaryFormat.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoCodeView.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Utils.a  /opt/homebrew/opt/llvm@15/lib/libLLVMSupport.a  -lm  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libz.tbd  /opt/homebrew/lib/libzstd.dylib  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurses.tbd  /opt/homebrew/opt/llvm@15/lib/libLLVMDemangle.a
   OBJECT_DIR = CMakeFiles/matur_pl.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -79,7 +79,7 @@ build matur_pl: CXX_EXECUTABLE_LINKER__matur_pl_Debug CMakeFiles/matur_pl.dir/ma
 # Utility command for package
 
 build CMakeFiles/package.util: CUSTOM_COMMAND all
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -91,7 +91,7 @@ build package: phony CMakeFiles/package.util
 # Utility command for package_source
 
 build CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CPackSourceConfig.cmake
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/CPackSourceConfig.cmake
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -103,7 +103,7 @@ build package_source: phony CMakeFiles/package_source.util
 # Utility command for edit_cache
 
 build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -114,7 +114,7 @@ build edit_cache: phony CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -123,15 +123,21 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /Users/danilkasirin/projects_C/5sem/pl/matur-pl/CMakeLists.txt
+# /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/CMakeLists.txt
 # =============================================================================
+
+
+#############################################
+# Utility command for ast
+
+build ast/ast: phony
 
 
 #############################################
 # Utility command for package
 
 build ast/CMakeFiles/package.util: CUSTOM_COMMAND ast/all
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -143,7 +149,7 @@ build ast/package: phony ast/CMakeFiles/package.util
 # Utility command for package_source
 
 build ast/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CPackSourceConfig.cmake
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/CPackSourceConfig.cmake
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -155,7 +161,7 @@ build ast/package_source: phony ast/CMakeFiles/package_source.util
 # Utility command for edit_cache
 
 build ast/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/ast && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/ast && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -166,7 +172,7 @@ build ast/edit_cache: phony ast/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build ast/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/ast && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/ast && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -175,7 +181,7 @@ build ast/rebuild_cache: phony ast/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /Users/danilkasirin/projects_C/5sem/pl/matur-pl/CMakeLists.txt
+# /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/CMakeLists.txt
 # =============================================================================
 
 # =============================================================================
@@ -187,10 +193,10 @@ build ast/rebuild_cache: phony ast/CMakeFiles/rebuild_cache.util
 
 build cmake_object_order_depends_target_lexer: phony || lexer/CMakeFiles/lexer.dir
 
-build lexer/CMakeFiles/lexer.dir/Lexer.cpp.o: CXX_COMPILER__lexer_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl/lexer/Lexer.cpp || cmake_object_order_depends_target_lexer
+build lexer/CMakeFiles/lexer.dir/Lexer.cpp.o: CXX_COMPILER__lexer_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/lexer/Lexer.cpp || cmake_object_order_depends_target_lexer
   DEP_FILE = lexer/CMakeFiles/lexer.dir/Lexer.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/lexer
+  INCLUDES = -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/lexer
   OBJECT_DIR = lexer/CMakeFiles/lexer.dir
   OBJECT_FILE_DIR = lexer/CMakeFiles/lexer.dir
 
@@ -216,7 +222,7 @@ build lexer/liblexer.a: CXX_STATIC_LIBRARY_LINKER__lexer_Debug lexer/CMakeFiles/
 # Utility command for package
 
 build lexer/CMakeFiles/package.util: CUSTOM_COMMAND lexer/all
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -228,7 +234,7 @@ build lexer/package: phony lexer/CMakeFiles/package.util
 # Utility command for package_source
 
 build lexer/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CPackSourceConfig.cmake
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/CPackSourceConfig.cmake
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -240,7 +246,7 @@ build lexer/package_source: phony lexer/CMakeFiles/package_source.util
 # Utility command for edit_cache
 
 build lexer/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/lexer && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/lexer && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -251,7 +257,7 @@ build lexer/edit_cache: phony lexer/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build lexer/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/lexer && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/lexer && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -260,7 +266,7 @@ build lexer/rebuild_cache: phony lexer/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /Users/danilkasirin/projects_C/5sem/pl/matur-pl/CMakeLists.txt
+# /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/CMakeLists.txt
 # =============================================================================
 
 # =============================================================================
@@ -270,12 +276,12 @@ build lexer/rebuild_cache: phony lexer/CMakeFiles/rebuild_cache.util
 #############################################
 # Order-only phony target for parser
 
-build cmake_object_order_depends_target_parser: phony || cmake_object_order_depends_target_lexer
+build cmake_object_order_depends_target_parser: phony || ast/ast cmake_object_order_depends_target_lexer
 
-build parser/CMakeFiles/parser.dir/Parser.cpp.o: CXX_COMPILER__parser_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl/parser/Parser.cpp || cmake_object_order_depends_target_parser
+build parser/CMakeFiles/parser.dir/Parser.cpp.o: CXX_COMPILER__parser_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/parser/Parser.cpp || cmake_object_order_depends_target_parser
   DEP_FILE = parser/CMakeFiles/parser.dir/Parser.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/parser -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/ast -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/lexer
+  INCLUDES = -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/parser -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/ast -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/lexer
   OBJECT_DIR = parser/CMakeFiles/parser.dir
   OBJECT_FILE_DIR = parser/CMakeFiles/parser.dir
 
@@ -287,7 +293,7 @@ build parser/CMakeFiles/parser.dir/Parser.cpp.o: CXX_COMPILER__parser_unscanned_
 #############################################
 # Link the static library parser/libparser.a
 
-build parser/libparser.a: CXX_STATIC_LIBRARY_LINKER__parser_Debug parser/CMakeFiles/parser.dir/Parser.cpp.o || lexer/liblexer.a
+build parser/libparser.a: CXX_STATIC_LIBRARY_LINKER__parser_Debug parser/CMakeFiles/parser.dir/Parser.cpp.o || ast/ast lexer/liblexer.a
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = parser/CMakeFiles/parser.dir
@@ -301,7 +307,7 @@ build parser/libparser.a: CXX_STATIC_LIBRARY_LINKER__parser_Debug parser/CMakeFi
 # Utility command for package
 
 build parser/CMakeFiles/package.util: CUSTOM_COMMAND parser/all
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -313,7 +319,7 @@ build parser/package: phony parser/CMakeFiles/package.util
 # Utility command for package_source
 
 build parser/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CPackSourceConfig.cmake
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/CPackSourceConfig.cmake
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -325,7 +331,7 @@ build parser/package_source: phony parser/CMakeFiles/package_source.util
 # Utility command for edit_cache
 
 build parser/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/parser && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -336,7 +342,7 @@ build parser/edit_cache: phony parser/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build parser/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/parser && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -345,48 +351,8 @@ build parser/rebuild_cache: phony parser/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
-# /Users/danilkasirin/projects_C/5sem/pl/matur-pl/CMakeLists.txt
+# /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/CMakeLists.txt
 # =============================================================================
-
-# =============================================================================
-# Object build statements for STATIC_LIBRARY target llvm-backend
-
-
-#############################################
-# Order-only phony target for llvm-backend
-
-build cmake_object_order_depends_target_llvm-backend: phony || llvm-backend/CMakeFiles/llvm-backend.dir
-
-build llvm-backend/CMakeFiles/llvm-backend.dir/IRGenerator.cpp.o: CXX_COMPILER__llvm-backend_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend/IRGenerator.cpp || cmake_object_order_depends_target_llvm-backend
-  DEP_FILE = llvm-backend/CMakeFiles/llvm-backend.dir/IRGenerator.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics   -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS
-  INCLUDES = -I/opt/homebrew/opt/llvm@15/include -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend/../ast -isystem /opt/homebrew/include
-  OBJECT_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
-  OBJECT_FILE_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
-
-build llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o: CXX_COMPILER__llvm-backend_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend/JITExecutor.cpp || cmake_object_order_depends_target_llvm-backend
-  DEP_FILE = llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics   -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS
-  INCLUDES = -I/opt/homebrew/opt/llvm@15/include -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend/../ast -isystem /opt/homebrew/include
-  OBJECT_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
-  OBJECT_FILE_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target llvm-backend
-
-
-#############################################
-# Link the static library llvm-backend/libllvm-backend.a
-
-build llvm-backend/libllvm-backend.a: CXX_STATIC_LIBRARY_LINKER__llvm-backend_Debug llvm-backend/CMakeFiles/llvm-backend.dir/IRGenerator.cpp.o llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o || /opt/homebrew/lib/libzstd.dylib
-  ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
-  LANGUAGE_COMPILE_FLAGS = -g
-  OBJECT_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = llvm-backend/libllvm-backend.a
-  TARGET_PDB = llvm-backend.a.dbg
 
 
 #############################################
@@ -406,12 +372,54 @@ build llvm-backend/omp_gen: phony
 
 build llvm-backend/acc_gen: phony
 
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target llvm-backend
+
+
+#############################################
+# Order-only phony target for llvm-backend
+
+build cmake_object_order_depends_target_llvm-backend: phony || llvm-backend/CMakeFiles/llvm-backend.dir
+
+build llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o: CXX_COMPILER__llvm-backend_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend/JITExecutor.cpp || cmake_object_order_depends_target_llvm-backend
+  DEFINES = -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS
+  DEP_FILE = llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o.d
+  FLAGS = -fPIC -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wimplicit-fallthrough -Wcovered-switch-default -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wsuggest-override -Wstring-conversion -Wmisleading-indentation -fdiagnostics-color -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
+  INCLUDES = -I/opt/homebrew/opt/llvm@15/include -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend/../ast -isystem /opt/homebrew/include
+  OBJECT_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
+  OBJECT_FILE_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
+
+build llvm-backend/CMakeFiles/llvm-backend.dir/IRGeneratorV2.cpp.o: CXX_COMPILER__llvm-backend_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend/IRGeneratorV2.cpp || cmake_object_order_depends_target_llvm-backend
+  DEFINES = -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS
+  DEP_FILE = llvm-backend/CMakeFiles/llvm-backend.dir/IRGeneratorV2.cpp.o.d
+  FLAGS = -fPIC -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wimplicit-fallthrough -Wcovered-switch-default -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wsuggest-override -Wstring-conversion -Wmisleading-indentation -fdiagnostics-color -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
+  INCLUDES = -I/opt/homebrew/opt/llvm@15/include -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend/../ast -isystem /opt/homebrew/include
+  OBJECT_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
+  OBJECT_FILE_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target llvm-backend
+
+
+#############################################
+# Link the static library llvm-backend/libllvm-backend.a
+
+build llvm-backend/libllvm-backend.a: CXX_STATIC_LIBRARY_LINKER__llvm-backend_Debug llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o llvm-backend/CMakeFiles/llvm-backend.dir/IRGeneratorV2.cpp.o || /opt/homebrew/lib/libzstd.dylib
+  ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+  LANGUAGE_COMPILE_FLAGS = -fPIC -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wimplicit-fallthrough -Wcovered-switch-default -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wsuggest-override -Wstring-conversion -Wmisleading-indentation -fdiagnostics-color -g
+  OBJECT_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = llvm-backend/libllvm-backend.a
+  TARGET_PDB = llvm-backend.a.dbg
+
 
 #############################################
 # Utility command for package
 
 build llvm-backend/CMakeFiles/package.util: CUSTOM_COMMAND llvm-backend/all
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
   DESC = Run CPack packaging tool...
   pool = console
   restat = 1
@@ -423,7 +431,7 @@ build llvm-backend/package: phony llvm-backend/CMakeFiles/package.util
 # Utility command for package_source
 
 build llvm-backend/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/CPackSourceConfig.cmake
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/CPackSourceConfig.cmake
   DESC = Run CPack packaging tool for source...
   pool = console
   restat = 1
@@ -435,7 +443,7 @@ build llvm-backend/package_source: phony llvm-backend/CMakeFiles/package_source.
 # Utility command for edit_cache
 
 build llvm-backend/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/llvm-backend && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
   DESC = No interactive CMake dialog available...
   restat = 1
 
@@ -446,7 +454,7 @@ build llvm-backend/edit_cache: phony llvm-backend/CMakeFiles/edit_cache.util
 # Utility command for rebuild_cache
 
 build llvm-backend/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/llvm-backend && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug
   DESC = Running CMake to regenerate build system...
   pool = console
   restat = 1
@@ -454,9 +462,96 @@ build llvm-backend/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
 build llvm-backend/rebuild_cache: phony llvm-backend/CMakeFiles/rebuild_cache.util
 
 # =============================================================================
+# Write statements declared in CMakeLists.txt:
+# /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/CMakeLists.txt
+# =============================================================================
+
+# =============================================================================
+# Object build statements for STATIC_LIBRARY target vm
+
+
+#############################################
+# Order-only phony target for vm
+
+build cmake_object_order_depends_target_vm: phony || vm/CMakeFiles/vm.dir
+
+build vm/CMakeFiles/vm.dir/LlvmParser.cpp.o: CXX_COMPILER__vm_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/vm/LlvmParser.cpp || cmake_object_order_depends_target_vm
+  DEP_FILE = vm/CMakeFiles/vm.dir/LlvmParser.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/vm
+  OBJECT_DIR = vm/CMakeFiles/vm.dir
+  OBJECT_FILE_DIR = vm/CMakeFiles/vm.dir
+
+
+# =============================================================================
+# Link build statements for STATIC_LIBRARY target vm
+
+
+#############################################
+# Link the static library vm/libvm.a
+
+build vm/libvm.a: CXX_STATIC_LIBRARY_LINKER__vm_Debug vm/CMakeFiles/vm.dir/LlvmParser.cpp.o
+  ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
+  LANGUAGE_COMPILE_FLAGS = -g
+  OBJECT_DIR = vm/CMakeFiles/vm.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = vm/libvm.a
+  TARGET_PDB = vm.a.dbg
+
+
+#############################################
+# Utility command for package
+
+build vm/CMakeFiles/package.util: CUSTOM_COMMAND vm/all
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackConfig.cmake
+  DESC = Run CPack packaging tool...
+  pool = console
+  restat = 1
+
+build vm/package: phony vm/CMakeFiles/package.util
+
+
+#############################################
+# Utility command for package_source
+
+build vm/CMakeFiles/package_source.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cpack --config ./CPackSourceConfig.cmake /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/CPackSourceConfig.cmake
+  DESC = Run CPack packaging tool for source...
+  pool = console
+  restat = 1
+
+build vm/package_source: phony vm/CMakeFiles/package_source.util
+
+
+#############################################
+# Utility command for edit_cache
+
+build vm/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/vm && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build vm/edit_cache: phony vm/CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build vm/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/vm && /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake --regenerate-during-build -S/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft -B/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build vm/rebuild_cache: phony vm/CMakeFiles/rebuild_cache.util
+
+# =============================================================================
 # Target aliases.
 
 build acc_gen: phony llvm-backend/acc_gen
+
+build ast: phony ast/ast
 
 build intrinsics_gen: phony llvm-backend/intrinsics_gen
 
@@ -468,11 +563,15 @@ build libllvm-backend.a: phony llvm-backend/libllvm-backend.a
 
 build libparser.a: phony parser/libparser.a
 
+build libvm.a: phony vm/libvm.a
+
 build llvm-backend: phony llvm-backend/libllvm-backend.a
 
 build omp_gen: phony llvm-backend/omp_gen
 
 build parser: phony parser/libparser.a
+
+build vm: phony vm/libvm.a
 
 # =============================================================================
 # Folder targets.
@@ -480,37 +579,44 @@ build parser: phony parser/libparser.a
 # =============================================================================
 
 #############################################
-# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug
+# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug
 
-build all: phony matur_pl ast/all lexer/all parser/all llvm-backend/all
-
-# =============================================================================
-
-#############################################
-# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/ast
-
-build ast/all: phony
+build all: phony matur_pl ast/all lexer/all parser/all llvm-backend/all vm/all
 
 # =============================================================================
 
 #############################################
-# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/lexer
+# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/ast
+
+build ast/all: phony ast/ast
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/lexer
 
 build lexer/all: phony lexer/liblexer.a
 
 # =============================================================================
 
 #############################################
-# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/llvm-backend
+# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/llvm-backend
 
 build llvm-backend/all: phony llvm-backend/libllvm-backend.a
 
 # =============================================================================
 
 #############################################
-# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl/cmake-build-debug/parser
+# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/parser
 
 build parser/all: phony parser/libparser.a
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/vm
+
+build vm/all: phony vm/libvm.a
 
 # =============================================================================
 # Built-in targets
@@ -519,14 +625,14 @@ build parser/all: phony parser/libparser.a
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakePushCheckState.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CPack.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CPackComponent.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckCSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindLibXml2.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPkgConfig.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindZLIB.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/SelectLibraryConfigurations.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Templates/CPackConfig.cmake.in /Users/danilkasirin/projects_C/5sem/pl/matur-pl/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl/ast/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl/lexer/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl/parser/CMakeLists.txt /opt/homebrew/opt/llvm@15/lib/cmake/llvm/FindFFI.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/FindTerminfo.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/Findzstd.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVM-Config.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMConfig.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMConfigVersion.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMExports-release.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMExports.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/AddFileDependencies.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeDependentOption.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeParseArguments.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakePushCheckState.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CPack.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CPackComponent.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckCCompilerFlag.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckCSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckCXXCompilerFlag.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckCXXSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckLinkerFlag.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckSymbolExists.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindLibXml2.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPkgConfig.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindZLIB.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Internal/CheckCompilerFlag.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Internal/CheckFlagCommonConfig.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Internal/CheckLinkerFlag.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/SelectLibraryConfigurations.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Templates/CPackConfig.cmake.in /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/ast/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/lexer/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/parser/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/vm/CMakeLists.txt /opt/homebrew/opt/llvm@15/lib/cmake/llvm/CheckCompilerVersion.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/CheckProblematicConfigurations.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/DetermineGCCCompatible.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/FindFFI.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/FindTerminfo.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/Findzstd.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/HandleLLVMOptions.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/HandleLLVMStdlib.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVM-Config.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMCheckLinkerFlag.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMConfig.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMConfigVersion.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMExports-release.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMExports.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMProcessSources.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakePushCheckState.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CPack.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CPackComponent.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckCSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindLibXml2.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPkgConfig.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindZLIB.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/SelectLibraryConfigurations.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Templates/CPackConfig.cmake.in /Users/danilkasirin/projects_C/5sem/pl/matur-pl/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl/ast/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl/lexer/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl/parser/CMakeLists.txt /opt/homebrew/opt/llvm@15/lib/cmake/llvm/FindFFI.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/FindTerminfo.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/Findzstd.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVM-Config.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMConfig.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMConfigVersion.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMExports-release.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMExports.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
+build /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/AddFileDependencies.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCXXInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeDependentOption.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeGenericSystem.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeParseArguments.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakePushCheckState.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CPack.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CPackComponent.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckCCompilerFlag.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckCSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckCXXCompilerFlag.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckCXXSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckLinkerFlag.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/CheckSymbolExists.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Compiler/GNU.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindLibXml2.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageHandleStandardArgs.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPackageMessage.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindPkgConfig.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/FindZLIB.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Internal/CheckCompilerFlag.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Internal/CheckFlagCommonConfig.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Internal/CheckLinkerFlag.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Internal/CheckSourceCompiles.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-AppleClang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-C.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang-CXX.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Apple-Clang.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin-Initialize.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/Darwin.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/Platform/UnixPaths.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Modules/SelectLibraryConfigurations.cmake /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.26/Templates/CPackConfig.cmake.in /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/ast/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/lexer/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/parser/CMakeLists.txt /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/vm/CMakeLists.txt /opt/homebrew/opt/llvm@15/lib/cmake/llvm/CheckCompilerVersion.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/CheckProblematicConfigurations.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/DetermineGCCCompatible.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/FindFFI.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/FindTerminfo.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/Findzstd.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/HandleLLVMOptions.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/HandleLLVMStdlib.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVM-Config.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMCheckLinkerFlag.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMConfig.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMConfigVersion.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMExports-release.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMExports.cmake /opt/homebrew/opt/llvm@15/lib/cmake/llvm/LLVMProcessSources.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
 
 
 #############################################

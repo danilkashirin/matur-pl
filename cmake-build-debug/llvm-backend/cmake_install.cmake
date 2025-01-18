@@ -1,4 +1,4 @@
-# Install script for directory: /Users/danilkasirin/projects_C/5sem/pl/matur-pl/llvm-backend
+# Install script for directory: /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
