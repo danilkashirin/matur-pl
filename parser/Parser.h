@@ -3,24 +3,51 @@
 
 #include <vector>
 #include <memory>
-#include "../lexer/Lexer.h"
-#include "../ast/ASTNode.h"
+#include <string>
+
+#include "ArrayAST.h"
+#include "ASTNode.h"
+#include "ForNode.h"
+#include "Lexer.h"
 
 class Parser {
  public:
-  Parser(const std::string& input);
+  explicit Parser(const std::string& input);
 
+  // Основной метод для парсинга входной строки и возвращения AST-узлов
   std::vector<std::unique_ptr<ASTNode>> parse();
 
  private:
-  void consumeToken();
-  std::unique_ptr<ASTNode> parseVariableDeclaration();
-  int64_t parseValue(const std::string& type);
-  void expect(TokenType expectedType);
-  std::unique_ptr<ASTNode> parsePrintStatement();
-
   Lexer lexer;
   Token currentToken;
+
+  void consumeToken();
+
+  void expect(TokenType expectedType);
+
+  ASTNode* parseVariableDeclaration();
+  ASTNode* parseAssignment();
+  ASTNode* parsePrintStatement();
+
+  ASTNode* parseExpression();
+  ASTNode* parseTerm();
+  ASTNode* parseFactor();
+
+  ASTNode* parseArrayDeclaration();
+
+  std::vector<int64_t> parseArrayElements(const std::string& elementType);
+
+  int64_t parseSize();
+
+  ASTNode* parseArrayAccess(const std::string& arrayName);
+
+  int64_t parseValue(const std::string& type);
+
+  ASTNode* parseAccessValueForArray();
+
+  ASTNode* parseFor();
+
+  ASTNode* parseIf();
 };
 
 #endif // PARSER_H

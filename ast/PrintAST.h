@@ -2,16 +2,22 @@
 #define PRINT_AST_H
 
 #include "ASTNode.h"
-#include <string>
+#include <memory>
+#include <cassert>
 
 class PrintAST : public ASTNode {
  public:
-  PrintAST(const std::string& identifier) : identifier(identifier) {}
+  explicit PrintAST(std::unique_ptr<ASTNode> expression)
+      : expression(std::move(expression)) {}
 
-  const std::string& getIdentifier() const { return identifier; }
+  [[nodiscard]] const ASTNode* getExpression() const { return expression.get(); }
+
+  std::vector<std::string> getVariableNames() override {
+    return expression->getVariableNames();
+  }
 
  private:
-  std::string identifier;
+  std::unique_ptr<ASTNode> expression;
 };
 
 #endif // PRINT_AST_H

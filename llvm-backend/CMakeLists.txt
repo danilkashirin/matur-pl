@@ -1,16 +1,21 @@
 cmake_minimum_required(VERSION 3.26)
 
-add_library(llvm-backend STATIC IRGenerator.cpp JITExecutor.cpp)
+find_package(LLVM REQUIRED CONFIG)
 
-find_package(LLVM 15.0.7 REQUIRED CONFIG)
+list(APPEND CMAKE_MODULE_PATH "${LLVM_CMAKE_DIR}")
+include(HandleLLVMOptions)
 
-include_directories(${LLVM_INCLUDE_DIRS})
-add_definitions(${LLVM_DEFINITIONS})
+add_library(llvm-backend STATIC JITExecutor.cpp
+        IRGeneratorV2.cpp
+)
 
 target_include_directories(llvm-backend PUBLIC
+        ${LLVM_INCLUDE_DIRS}
         "${CMAKE_CURRENT_SOURCE_DIR}"
         "${CMAKE_CURRENT_SOURCE_DIR}/../ast"
 )
+
+target_compile_definitions(llvm-backend PUBLIC ${LLVM_DEFINITIONS})
 
 llvm_map_components_to_libnames(llvm_libs
         core

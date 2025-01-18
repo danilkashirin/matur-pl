@@ -1,17 +1,12 @@
-#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
 #include "llvm-backend/JITExecutor.h"
-#include "llvm-backend/IRGenerator.h"
+#include "llvm-backend/IRGeneratorV2.h"
 #include "parser/Parser.h"
-
+#include "vm/LlvmParser.h"
 
 int main(int argc, char* argv[]) {
-  if (argc < 2) {
-    std::cerr << "Usage: <program> <input IR file>\n";
-    return 1;
-  }
 
   std::ifstream file(argv[1]);
   std::stringstream input_buffer;
@@ -21,7 +16,9 @@ int main(int argc, char* argv[]) {
 
   Parser parser(code);
   auto ast = parser.parse();
-  std::string irCode = generateIR(ast);
 
-  return static_cast<int>(executeIR(irCode));
+  llvm::LLVMContext context;
+  auto module = generateModuleIR(ast, context, (argc >= 3));
+
+  executeIR(module);
 }

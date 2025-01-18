@@ -1,123 +1,125 @@
+#include "LlvmParser.h"
 #include <iostream>
 #include <sstream>
 #include <regex>
-#include "LlvmIrParser.h"
+#include <cassert>
 
-// Функция для преобразования строки в Opcode
-Opcode opcodeFromString(const std::string& str) {
-  if (str == "phi") return Opcode::Phi;
-  if (str == "mul") return Opcode::Mul;
-  if (str == "add") return Opcode::Add;
-  if (str == "icmp") return Opcode::ICmp;
-  if (str == "br") return Opcode::Br;
-  if (str == "call") return Opcode::Call;
-  if (str == "ret") return Opcode::Ret;
-  return Opcode::Unknown;
-}
+LLVMParser::LLVMParser(const std::string& code)
+    : codeStream(code), currentFunction(nullptr), currentBlock(nullptr) {}
 
-// Instruction Implementation
-
-Instruction::Instruction(Opcode op, const std::vector<std::string>& arguments, const std::string& res)
-    : opcode(op), args(arguments), result(res) {}
-
-void Instruction::print() const {
-  std::cout << "Instruction(opcode='";
-
-  switch (opcode) {
-    case Opcode::Phi: std::cout << "phi";
-      break;
-    case Opcode::Mul: std::cout << "mul";
-      break;
-    case Opcode::Add: std::cout << "add";
-      break;
-    case Opcode::ICmp: std::cout << "icmp";
-      break;
-    case Opcode::Br: std::cout << "br";
-      break;
-    case Opcode::Call: std::cout << "call";
-      break;
-    case Opcode::Ret: std::cout << "ret";
-      break;
-    default: std::cout << "unknown";
-      break;
-  }
-
-  std::cout << "', args=[";
-  for (size_t i = 0; i < args.size(); ++i) {
-    std::cout << args[i];
-    if (i < args.size() - 1) std::cout << ", ";
-  }
-  std::cout << "], result='" << result << "')\n";
-}
-
-// LLVMIRParser Implementation
-
-void LLVMIRParser::parse(const std::string& llvm_ir) {
-  std::istringstream stream(llvm_ir);
+void LLVMParser::parse() {
   std::string line;
-  std::regex label_regex(R"((\w+):)");
-  std::regex instr_regex(R"((\S+)\s*=\s*(\S+)\s*(.*))");
-  std::regex simple_instr_regex(R"((\S+)\s*(.*))");
-
-  while (std::getline(stream, line)) {
+  while (std::getline(codeStream, line)) {
     line = trim(line);
+    if (line.empty()) continue;
 
-    // Пропускаем пустые строки и комментарии
-    if (line.empty() || line[0] == ';') continue;
-
-    // Проверяем на метки
-    std::smatch label_match;
-    if (std::regex_match(line, label_match, label_regex)) {
-      std::string label = label_match[1].str();
-      labels[label] = instructions.size();
-      continue;
+    if (line[0] == ';') {
+      moduleInfo.push_back(line);
+    } else if (line.substr(0, 7) == "source_") {
+      size_t pos = line.find('=');
+      if (pos != std::string::npos) {
+        sourceFilename = line.substr(pos + 2);
+      }
+    } else if (line[0] == '@') {
+      parseGlobalVariable(line);
+    } else if (line.substr(0, 6) == "define") {
+      parseFunction(line);
+    } else if (line == "}" || line.substr(0, 7) == "declare") {
+      if (line == "}") {
+        currentFunction = nullptr; // Завершаем функцию
+        currentBlock = nullptr;    // Завершаем текущий блок
+      }
+    } else if (line.back() == ':') { // Метка блока
+      parseBlock(line);
+    } else {
+      parseInstruction(line);
     }
+  }
+}
 
-    // Парсим инструкции
-    std::smatch instr_match;
-    if (std::regex_match(line, instr_match, instr_regex)) {
-      std::string result = instr_match[1].str();
-      Opcode opcode = opcodeFromString(instr_match[2].str());
-      std::vector<std::string> args = split(instr_match[3].str());
-      instructions.emplace_back(opcode, args, result);
-    } else if (std::regex_match(line, instr_match, simple_instr_regex)) {
-      Opcode opcode = opcodeFromString(instr_match[1].str());
-      std::vector<std::string> args = split(instr_match[2].str());
-      instructions.emplace_back(opcode, args);
+void LLVMParser::parseGlobalVariable(const std::string& line) {
+  std::regex globalVarRegex(R"(^@(\w+)\s*=\s*.*\s*constant\s*(\[.*\])\s*c\"(.*)\")");
+  std::smatch match;
+  if (std::regex_search(line, match, globalVarRegex)) {
+    globalVariables.push_back({match[1], match[2], match[3]});
+  }
+}
+
+void LLVMParser::parseFunction(const std::string& line) {
+  std::regex funcRegex(R"(^define\s+\w+\s+@(\w+)\()");
+  std::smatch match;
+  if (std::regex_search(line, match, funcRegex)) {
+    functions.push_back({match[1], {}});
+    currentFunction = &functions.back();
+  }
+}
+
+void LLVMParser::parseBlock(const std::string& line) {
+  if (currentFunction) {
+    std::string blockName = line.substr(0, line.size() - 1);  // Убираем ':'
+    currentFunction->blocks.push_back({blockName, {}});
+    currentBlock = &currentFunction->blocks.back();
+  }
+}
+
+void LLVMParser::parseInstruction(const std::string& line) {
+  if (currentBlock) {
+    size_t pos = line.find(' ');
+    std::string type = (pos != std::string::npos) ? line.substr(0, pos) : line;
+    currentBlock->instructions.push_back({type, line});
+  }
+}
+
+std::string LLVMParser::trim(const std::string& str) {
+  size_t first = str.find_first_not_of(' ');
+  if (first == std::string::npos) return "";
+  size_t last = str.find_last_not_of(' ');
+  return str.substr(first, (last - first + 1));
+}
+
+const std::vector<Function>& LLVMParser::getFunctions() const {
+  return functions;
+}
+
+const std::vector<std::string>& LLVMParser::getModuleInfo() const {
+  return moduleInfo;
+}
+
+const std::string& LLVMParser::getSourceFilename() const {
+  return sourceFilename;
+}
+
+const std::vector<GlobalVariable>& LLVMParser::getGlobalVariables() const {
+  return globalVariables;
+}
+
+void LLVMParser::printDebugInfo() const {
+  std::cout << "Module Info:" << std::endl;
+  for (const auto& line : moduleInfo) {
+    std::cout << "  " << line << std::endl;
+  }
+  std::cout << "Source Filename: " << sourceFilename << std::endl;
+  printGlobalVariables();
+  printFunctions();
+}
+
+void LLVMParser::printFunctions() const {
+  for (const auto& function : functions) {
+    std::cout << "Function: " << function.name << std::endl;
+    for (const auto& block : function.blocks) {
+      std::cout << "  Block: " << block.name << std::endl;
+      for (const auto& instr : block.instructions) {
+        std::cout << "    Instruction: " << instr.type << " - " << instr.content << std::endl;
+      }
     }
   }
 }
 
-void LLVMIRParser::printInstructions() const {
-  for (const auto& instr : instructions) {
-    instr.print();
-  }
-}
+void LLVMParser::printGlobalVariables() const {
 
-void LLVMIRParser::printLabels() const {
-  for (const auto& label : labels) {
-    std::cout << label.first << ": " << label.second << "\n";
+  std::cout << "Global Variables:" << std::endl;
+  for (const auto& variable : globalVariables) {
+    std::cout << "  Name: " << variable.name << ", Type: " << variable.type << ", Value: " << variable.value
+              << std::endl;
   }
-}
-
-std::string LLVMIRParser::trim(const std::string& str) {
-  const std::string whitespace = " \t";
-  const size_t begin = str.find_first_not_of(whitespace);
-  if (begin == std::string::npos) {
-    return "";
-  }
-
-  const size_t end = str.find_last_not_of(whitespace);
-  const size_t range = end - begin + 1;
-  return str.substr(begin, range);
-}
-
-std::vector<std::string> LLVMIRParser::split(const std::string& str) {
-  std::vector<std::string> tokens;
-  std::istringstream stream(str);
-  std::string token;
-  while (std::getline(stream, token, ',')) {
-    tokens.push_back(trim(token));
-  }
-  return tokens;
 }

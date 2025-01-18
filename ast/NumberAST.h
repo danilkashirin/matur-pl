@@ -1,16 +1,21 @@
-#ifndef NUMBER_NODE_H
-#define NUMBER_NODE_H
+#ifndef NUMBER_AST_H
+#define NUMBER_AST_H
 
 #include "ASTNode.h"
+#include <cassert>
 
-class NumberNode : public ASTNode {
+class NumberAST : public ASTNode {
  public:
-  explicit NumberNode(int64_t value) : value_(value) {}
+  explicit NumberAST(int64_t value) : value_(value) {}
 
-  int64_t GetValue() const { return value_; }
+  [[nodiscard]] int64_t getValue() const { return value_; }
+
+  std::vector<std::string> getVariableNames() override {
+    return std::vector<std::string>();
+  }
 
  private:
   int64_t value_;
 };
 
-#endif // NUMBER_NODE_H
+#endif // NUMBER_AST_H

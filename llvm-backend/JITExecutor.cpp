@@ -7,20 +7,10 @@
 #include <llvm/ExecutionEngine/GenericValue.h>
 #include <iostream>
 
-uint64_t executeIR(const std::string& irCode) {
-
+uint64_t executeIR(std::unique_ptr<llvm::Module>& module) {
   llvm::InitializeNativeTarget();
   llvm::InitializeNativeTargetAsmPrinter();
-
-  llvm::LLVMContext context;
-  llvm::SMDiagnostic err;
-
-  std::unique_ptr<llvm::Module> module = llvm::parseIR(llvm::MemoryBufferRef(irCode, "module"), err, context);
-
-  if (!module) {
-    std::cerr << "Error reading IR: " << err.getMessage().str() << "\n";
-    return 1;
-  }
+  llvm::InitializeNativeTargetDisassembler();
 
   std::string errStr;
   llvm::ExecutionEngine* engine = llvm::EngineBuilder(std::move(module))
@@ -33,11 +23,18 @@ uint64_t executeIR(const std::string& irCode) {
     return 1;
   }
 
-  engine->finalizeObject();
+  try {
+    engine->finalizeObject();
+  } catch (const std::exception& e) {
+    std::cerr << "Exception during finalizeObject: " << e.what() << "\n";
+    delete engine;
+    return 1;
+  }
 
   llvm::Function* mainFunc = engine->FindFunctionNamed("main");
   if (!mainFunc) {
     std::cerr << "Function 'main' not found\n";
+    delete engine;
     return 1;
   }
 

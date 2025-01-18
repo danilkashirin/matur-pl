@@ -12,7 +12,29 @@ enum class TokenType {
   Semicolon,
   LParen,
   RParen,
-  EndOfFile
+  Plus,
+  Minus,
+  Asterisk,
+  Slash,
+  Type,
+  EndOfFile,
+  Array,
+  LessThan,
+  GreaterThan,
+  LBracket,
+  RBracket,
+  Comma,
+  Modulo,
+  LessThanOrEqual,
+  GreaterThanOrEqual,
+  EqualsEquals,
+  For,
+  In,
+  CurlyLBracket,
+  CurlyRBracket,
+  If,
+  Else,
+  Random
 };
 
 struct Token {
