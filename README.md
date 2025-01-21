@@ -2,7 +2,7 @@
 
 ## Authors: 
 - Kashirin Danil (lead, all scopes)
-- Meshechkin Igor (lexer, parser, bytecode generator & vm for functions, ir generator)
+- Meshechkin Igor (parser, bytecode generator & vm for functions, ir generator)
 - Vakulenko Nazar (vm, garbage collector)
 - Rodezky Nikita (ast optimization)
 - Chill guy from Miami (support & debug)
