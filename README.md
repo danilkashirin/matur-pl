@@ -7,5 +7,6 @@
 - Rodezky Nikita (ast optimization)
 - Chill guy from Miami (support & debug)
 
-# Рекомендация
-В языке MATUR-PL обязательно в конце исполняемого файла необходимо добавить ключевое слово jawohl. Это служит сигналом завершения программы, иначе вы не избежите предупреждений!
+# Attention
+In the MATUR-PL language, it is mandatory to add the keyword "jawohl" at the end of the executable file. This serves as a signal for the end of the program; otherwise, you will receive warnings!
+
