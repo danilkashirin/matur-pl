@@ -1,7 +1,7 @@
-array<int> a(100000);
-int size = 100000;
+array<int> a(10000);
+int size = 10000;
 
-for i in <0, size> {
+for i in <size> {
     a[i] = 1;
 };
 
@@ -21,8 +21,10 @@ for i in <size> {
     };
 };
 
-for k in <0, size, 1> {
+for k in <size> {
     if (a[k] > 0) {
         print(k);
     };
 };
+
+jawohl;

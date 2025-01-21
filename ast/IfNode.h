@@ -21,42 +21,44 @@ class IfNode : public ASTNode {
   [[nodiscard]] const std::vector<std::unique_ptr<ASTNode>>& getThenBody() const { return thenBody_; }
   [[nodiscard]] const std::vector<std::unique_ptr<ASTNode>>& getElseBody() const { return elseBody_; }
 
-  std::vector<std::string> getVariableNames() override {
-    std::size_t body_nodes_count = 0;
-    for (auto& thenBody_node : this->thenBody_) {
-      assert(thenBody_node.get() != nullptr);
-      body_nodes_count += thenBody_node->getVariableNames().size();
-    }
-    for (auto& elseBody_node : this->elseBody_) {
-      assert(elseBody_node.get() != nullptr);
-      body_nodes_count += elseBody_node->getVariableNames().size();
-    }
-    auto condition_var_names = condition_->getVariableNames();
-    std::vector<std::string> values(condition_var_names.size() + body_nodes_count);
+  std::vector<std::tuple<std::string, std::vector<int64_t>>> generateBytecode(size_t currentOffset) const override {
+    std::vector<std::tuple<std::string, std::vector<int64_t>>> bytecode;
 
-    size_t i = 0;
-    for (auto& var : condition_var_names) {
-      values[i] = var;
-      i++;
+    auto conditionBytecode = condition_->generateBytecode(currentOffset);
+    bytecode.insert(bytecode.end(), conditionBytecode.begin(), conditionBytecode.end());
+
+    bytecode.emplace_back("JUMP_IF_FALSE", std::vector<int64_t>{0});
+    size_t jumpIfFalseIndex = bytecode.size() - 1;
+
+    auto then_offset = currentOffset + bytecode.size();
+    for (const auto& stmt : thenBody_) {
+      auto thenBytecode = stmt->generateBytecode(then_offset);
+      then_offset += thenBytecode.size();
+      bytecode.insert(bytecode.end(), thenBytecode.begin(), thenBytecode.end());
     }
 
-    for (auto& thenBody_node : this->thenBody_) {
-      for (std::string name : thenBody_node->getVariableNames()) {
-        values[i] = name;
-        i++;
+    size_t jumpIndex = 0;
+    if (!elseBody_.empty()) {
+      bytecode.emplace_back("JUMP", std::vector<int64_t>{0});
+      jumpIndex = bytecode.size() - 1;
+    }
+
+    std::get<1>(bytecode[jumpIfFalseIndex])[0] =
+        elseBody_.empty() ? currentOffset + bytecode.size() : currentOffset + jumpIndex + 1;
+
+    if (!elseBody_.empty()) {
+      auto else_offset = currentOffset + bytecode.size();
+      for (const auto& stmt : elseBody_) {
+        auto elseBytecode = stmt->generateBytecode(else_offset);
+        else_offset += elseBytecode.size();
+        bytecode.insert(bytecode.end(), elseBytecode.begin(), elseBytecode.end());
       }
+
+      std::get<1>(bytecode[jumpIndex])[0] = currentOffset + bytecode.size();
     }
 
-    for (auto& elseBody_node : this->elseBody_) {
-      assert(elseBody_node.get() != nullptr);
-      for (std::string name : elseBody_node->getVariableNames()) {
-        values[i] = name;
-        i++;
-      }
-    }
-    return values;
+    return bytecode;
   }
-
  private:
   ASTNode* condition_;
   std::vector<std::unique_ptr<ASTNode>> thenBody_;

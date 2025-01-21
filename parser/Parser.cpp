@@ -8,12 +8,14 @@
 #include "ArithmeticOpNode.h"
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 #include "AssigmentAST.h"
 #include "ArrayAST.h"
 #include "BooleanAST.h"
 #include "CompareOpNode.h"
 #include "ForNode.h"
+#include "FunctionAST.h"
 #include "IfNode.h"
 
 Parser::Parser(const std::string& input)
@@ -22,7 +24,7 @@ Parser::Parser(const std::string& input)
 std::vector<std::unique_ptr<ASTNode>> Parser::parse() {
   std::vector<std::unique_ptr<ASTNode>> nodes;
 
-  while (currentToken.type != TokenType::EndOfFile) {
+  while (currentToken.type != TokenType::Jawohl) {
     if (currentToken.type == TokenType::Type) {
       nodes.push_back(std::unique_ptr<ASTNode>(parseVariableDeclaration()));
     } else if (currentToken.type == TokenType::Identifier) {
@@ -35,7 +37,14 @@ std::vector<std::unique_ptr<ASTNode>> Parser::parse() {
       nodes.push_back(std::unique_ptr<ASTNode>(parseFor()));
     } else if (currentToken.type == TokenType::If) {
       nodes.push_back(std::unique_ptr<ASTNode>(parseIf()));
-    } else {
+    } else if (currentToken.type == TokenType::Def) {
+      nodes.push_back(std::unique_ptr<ASTNode>(parseFunction()));
+    } else if (currentToken.type == TokenType::EndOfFile) {
+      while (true) {
+        std::cout << "!! ACHTUNG ALARMA !!";
+      }
+    }
+    else {
       throw std::runtime_error("Unexpected token during parsing");
     }
   }
@@ -75,6 +84,9 @@ ASTNode* Parser::parseVariableDeclaration() {
 ASTNode* Parser::parseAssignment() {
   std::string varName = currentToken.value;
   consumeToken();
+  if (currentToken.type == TokenType::LParen) {
+    return parseCallFunction(varName);
+  }
 
   std::unique_ptr<ASTNode> leftSide;
   if (currentToken.type == TokenType::LBracket) {
@@ -109,17 +121,23 @@ ASTNode* Parser::parseExpression() {
       currentToken.type == TokenType::EqualsEquals) {
     CompareOpNode::Operator compareOp;
     switch (currentToken.type) {
-      case TokenType::LessThan:compareOp = CompareOpNode::Operator::LESS_THAN;
+      case TokenType::LessThan:
+        compareOp = CompareOpNode::Operator::LESS_THAN;
         break;
-      case TokenType::GreaterThan:compareOp = CompareOpNode::Operator::GREATER_THAN;
+      case TokenType::GreaterThan:
+        compareOp = CompareOpNode::Operator::GREATER_THAN;
         break;
-      case TokenType::LessThanOrEqual:compareOp = CompareOpNode::Operator::LESS_THAN_OR_EQUAL;
+      case TokenType::LessThanOrEqual:
+        compareOp = CompareOpNode::Operator::LESS_THAN_OR_EQUAL;
         break;
-      case TokenType::GreaterThanOrEqual:compareOp = CompareOpNode::Operator::GREATER_THAN_OR_EQUAL;
+      case TokenType::GreaterThanOrEqual:
+        compareOp = CompareOpNode::Operator::GREATER_THAN_OR_EQUAL;
         break;
-      case TokenType::EqualsEquals:compareOp = CompareOpNode::Operator::EQUALS;
+      case TokenType::EqualsEquals:
+        compareOp = CompareOpNode::Operator::EQUALS;
         break;
-      default:throw std::runtime_error("Unexpected comparison operator");
+      default:
+        throw std::runtime_error("Unexpected comparison operator");
     }
     consumeToken();
     auto right = parseTerm();
@@ -140,8 +158,7 @@ ASTNode* Parser::parseExpression() {
 ASTNode* Parser::parseTerm() {
   auto left = parseFactor();
 
-  while (currentToken.type == TokenType::Asterisk || currentToken.type == TokenType::Slash
-      || currentToken.type == TokenType::Modulo) {
+  while (currentToken.type == TokenType::Asterisk || currentToken.type == TokenType::Slash || currentToken.type == TokenType::Modulo) {
     auto opType = currentToken.type;
     consumeToken();
     auto right = parseFactor();
@@ -174,6 +191,8 @@ ASTNode* Parser::parseFactor() {
     if (currentToken.type == TokenType::LBracket) {
       auto node = parseArrayAccess(varName);
       return node;
+    }if (currentToken.type == TokenType::LParen) {
+      return parseCallFunction(varName);
     }
     return new VariableRefAST(varName);
   } else if (currentToken.type == TokenType::LParen) {
@@ -191,6 +210,8 @@ ASTNode* Parser::parseFactor() {
     return parseFor();
   } else if (currentToken.type == TokenType::If) {
     return parseIf();
+  } else if (currentToken.type == TokenType::Return) {
+    return parseReturn();
   } else {
     throw std::runtime_error("Unexpected factor");
   }
@@ -234,7 +255,7 @@ ASTNode* Parser::parseArrayDeclaration() {
     if (currentToken.type == TokenType::Random) {
       expect(TokenType::Random);
       expect(TokenType::LParen);
-      int64_t size_r = parseValue(elementType);
+      int size_r = parseValue(elementType);
       expect(TokenType::RParen);
       expect(TokenType::Semicolon);
       return new ArrayDeclAST(elementType, arrayName, size_r, generateRandomVector(size_r));
@@ -246,7 +267,7 @@ ASTNode* Parser::parseArrayDeclaration() {
         elements.push_back(0);
       }
     }
-    return new ArrayDeclAST(elementType, arrayName, static_cast<int64_t>(elements.size()), elements);
+    return new ArrayDeclAST(elementType, arrayName, elements.size(), elements);
   }
 
   expect(TokenType::Semicolon);
@@ -293,7 +314,7 @@ std::vector<int64_t> Parser::parseArrayElements(const std::string& elementType) 
 
 int64_t Parser::parseSize() {
   if (currentToken.type != TokenType::Number) {
-    throw std::runtime_error("Expected array size as a number or variable");
+    throw std::runtime_error("Expected array size as a number");
   }
   int64_t size = std::stoll(currentToken.value);
   consumeToken();
@@ -328,11 +349,12 @@ ASTNode* Parser::parseAccessValueForArray() {
     }
     return new NumberAST(minus ? -numValue : numValue);
   } else if (currentToken.type == TokenType::Identifier) {
-    auto varName = currentToken.value;
-    consumeToken();
-    return new VariableRefAST(varName);
+    return parseExpression();
+  } else if (currentToken.type == TokenType::Return) {
+    return parseReturn();
+  } else {
+    return parseExpression();
   }
-  return nullptr;
 }
 
 ASTNode* Parser::parseFor() {
@@ -342,9 +364,9 @@ ASTNode* Parser::parseFor() {
   expect(TokenType::In);
   expect(TokenType::LessThan);
 
-  ASTNode* start;
-  ASTNode* finish;
-  ASTNode* step;
+  ASTNode* start = nullptr;
+  ASTNode* finish = nullptr;
+  ASTNode* step = nullptr;
 
   finish = parseFactor();
 
@@ -353,7 +375,7 @@ ASTNode* Parser::parseFor() {
     consumeToken();
     finish = parseFactor();
   } else {
-    start = new NumberAST(0);
+    start = new NumberAST(1);
   }
 
   if (currentToken.type == TokenType::Comma) {
@@ -368,7 +390,7 @@ ASTNode* Parser::parseFor() {
 
   std::vector<std::unique_ptr<ASTNode>> elements;
   while (currentToken.type != TokenType::CurlyRBracket) {
-    ASTNode* rawPointer;
+    ASTNode* rawPointer = nullptr;
     if (currentToken.type == TokenType::Identifier) {
       rawPointer = parseAssignment();
     } else {
@@ -422,4 +444,68 @@ ASTNode* Parser::parseIf() {
   }
   expect(TokenType::Semicolon);
   return new IfNode(condition, std::move(elements), std::move(else_elements));
+}
+
+
+ASTNode* Parser::parseFunction() {
+  consumeToken();
+  std::string functionName = currentToken.value;
+  consumeToken();
+  expect(TokenType::LParen);
+  auto arguments = parsesFunctionArguments();
+  expect(TokenType::CurlyLBracket);
+  std::vector<std::unique_ptr<ASTNode>> bodyElements;
+
+  while (currentToken.type != TokenType::CurlyRBracket) {
+    if (currentToken.type == TokenType::Identifier) {
+      ASTNode* rawPointer = parseAssignment();
+      auto element = std::unique_ptr<ASTNode>(rawPointer);
+      bodyElements.push_back(std::move(element));
+    } else {
+      ASTNode* rawPointer = parseFactor();
+      auto element = std::unique_ptr<ASTNode>(rawPointer);
+      bodyElements.push_back(std::move(element));
+    }
+  }
+
+  expect(TokenType::CurlyRBracket);
+  expect(TokenType::Semicolon);
+
+  return new FunctionDeclNode(functionName, std::move(arguments), std::move(bodyElements));
+};
+
+std::vector<std::string> Parser::parsesFunctionArguments() {
+  std::vector<std::string> arguments;
+  while (currentToken.type != TokenType::RParen) {
+    std::string name = currentToken.value;
+    consumeToken();
+    if (currentToken.type == TokenType::Comma) {
+      expect(TokenType::Comma);
+    }
+    arguments.push_back(name);
+  }
+  expect(TokenType::RParen);
+  return arguments;
+}
+
+ASTNode* Parser::parseReturn() {
+  consumeToken();
+  auto rawPointer = parseExpression();
+  expect(TokenType::Semicolon);
+  return new ReturnNode(rawPointer);
+}
+
+ASTNode* Parser::parseCallFunction(std::string name) {
+  expect(TokenType::LParen);
+  std::vector<std::unique_ptr<ASTNode>> arguments;
+  while (currentToken.type != TokenType::RParen) {
+    ASTNode* rawPointer = parseExpression();
+    auto element = std::unique_ptr<ASTNode>(rawPointer);
+    arguments.push_back(std::move(element));
+    if (currentToken.type == TokenType::Comma) {
+      expect(TokenType::Comma);
+    }
+  }
+  expect(TokenType::RParen);
+  return new FunctionCallNode(std::move(name), std::move(arguments));
 }

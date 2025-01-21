@@ -13,11 +13,25 @@ class ArrayAccessAST : public ASTNode {
   [[nodiscard]] const std::string& getArrayName() const { return arrayName; }
   [[nodiscard]] ASTNode* getIndex() const { return index; }
 
-  std::vector<std::string> getVariableNames() override {
-    std::vector<std::string> values(1);
-    values[0] = this->arrayName;
-    return values;
+
+  [[nodiscard]] std::vector<std::tuple<std::string, std::vector<int64_t>>> generateBytecode(size_t currentOffset) const override {
+    std::vector<std::tuple<std::string, std::vector<int64_t>>> bytecode;
+
+    auto indexBytecode = index->generateBytecode(currentOffset);
+    currentOffset += indexBytecode.size();
+    bytecode.insert(bytecode.end(), indexBytecode.begin(), indexBytecode.end());
+
+    std::vector<int64_t> operands;
+    operands.push_back(arrayName.size());
+    for (char c : arrayName) {
+      operands.push_back(static_cast<int64_t>(c));
+    }
+
+    bytecode.emplace_back("LOAD_ARRAY_ELEMENT", operands);
+
+    return bytecode;
   }
+
 
  private:
   std::string arrayName;
@@ -34,11 +48,30 @@ class ArrayDeclAST : public ASTNode {
   [[nodiscard]] int64_t getSize() const { return size; }
   [[nodiscard]] const std::vector<int64_t>& getElements() const { return elements; }
 
-  std::vector<std::string> getVariableNames() override {
-    std::vector<std::string> values(1);
-    values[0] = this->name;
-    return values;
+  [[nodiscard]] std::vector<std::tuple<std::string, std::vector<int64_t>>> generateBytecode(size_t currentOffset) const override {
+    std::vector<std::tuple<std::string, std::vector<int64_t>>> bytecode;
+
+
+    std::vector<int64_t> operands;
+    operands.push_back(size);
+    operands.push_back(name.size());
+    for (char c : name) {
+      operands.push_back(static_cast<int64_t>(c));
+    }
+
+    for (int64_t i = 0; i < size && i < static_cast<int64_t>(elements.size()); ++i) {
+      operands.push_back(elements[i]);
+    }
+
+    for (int64_t i = elements.size(); i < size; ++i) {
+      operands.push_back(0);
+    }
+
+    bytecode.emplace_back("DECLARE_ARRAY", operands);
+
+    return bytecode;
   }
+
 
  private:
   std::string elementType;

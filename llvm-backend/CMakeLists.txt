@@ -7,6 +7,8 @@ include(HandleLLVMOptions)
 
 add_library(llvm-backend STATIC JITExecutor.cpp
         IRGeneratorV2.cpp
+        ../vm/ASTToBytecodeConverter.cpp
+        ../vm/VirtualMachine.cpp
 )
 
 target_include_directories(llvm-backend PUBLIC

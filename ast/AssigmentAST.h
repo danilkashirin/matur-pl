@@ -10,28 +10,49 @@ class AssignmentAST : public ASTNode {
   AssignmentAST(std::unique_ptr<ASTNode> lhs, std::unique_ptr<ASTNode> rhs)
       : lhs(std::move(lhs)), rhs(std::move(rhs)) {}
 
-    [[nodiscard]] ASTNode* getLHS() const { return lhs.get(); }
-    [[nodiscard]] ASTNode* getRHS() const { return rhs.get(); }
+  [[nodiscard]] ASTNode* getLHS() const { return lhs.get(); }
+  [[nodiscard]] ASTNode* getRHS() const { return rhs.get(); }
 
-  std::vector<std::string> getVariableNames() override {
-    assert(this->lhs.get() != nullptr);
-    assert(this->rhs.get() != nullptr);
-    std::vector<std::string> lhs_names = this->lhs->getVariableNames();
-    std::vector<std::string> rhs_names = this->rhs->getVariableNames();
-    std::vector<std::string> values(lhs_names.size() + rhs_names.size());
-    for (std::size_t i = 0; i < lhs_names.size(); ++i) {
-        values[i] = lhs_names[i];
+  std::vector<std::tuple<std::string, std::vector<int64_t>>> generateBytecode(size_t currentOffset) const override {
+    std::vector<std::tuple<std::string, std::vector<int64_t>>> bytecode;
+
+    if (auto* arrayAccess = dynamic_cast<ArrayAccessAST*>(lhs.get())) {
+
+      auto indexBytecode = arrayAccess->getIndex()->generateBytecode(currentOffset);
+      currentOffset += indexBytecode.size();
+      bytecode.insert(bytecode.end(), indexBytecode.begin(), indexBytecode.end());
+
+      auto rhsBytecode = rhs->generateBytecode(currentOffset);
+      currentOffset += rhsBytecode.size();
+      bytecode.insert(bytecode.end(), rhsBytecode.begin(), rhsBytecode.end());
+
+      std::vector<int64_t> operands;
+      operands.push_back(arrayAccess->getArrayName().size());
+      for (char c : arrayAccess->getArrayName()) {
+        operands.push_back(static_cast<int64_t>(c));
+      }
+      bytecode.emplace_back("ASSIGN_ARRAY_ELEMENT", operands);
+    } else if (auto* variable = dynamic_cast<VariableRefAST*>(lhs.get())) {
+
+      auto rhsBytecode = rhs->generateBytecode(currentOffset);
+      currentOffset += rhsBytecode.size();
+      bytecode.insert(bytecode.end(), rhsBytecode.begin(), rhsBytecode.end());
+
+      std::vector<int64_t> operands;
+      operands.push_back(variable->getName().size());
+      for (char c : variable->getName()) {
+        operands.push_back(static_cast<int64_t>(c));
+      }
+      bytecode.emplace_back("ASSIGN_VAR", operands);
+    } else {
+      std::cerr << "Unsupported LHS type in AssignmentAST\n";
     }
-    for (std::size_t i = lhs_names.size(); i < lhs_names.size() + rhs_names.size(); ++i) {
-        values[i] = rhs_names[i];
-    }
-    return values;
+
+    return bytecode;
   }
-
 
  private:
   std::unique_ptr<ASTNode> lhs;
-
   std::unique_ptr<ASTNode> rhs;
 };
 

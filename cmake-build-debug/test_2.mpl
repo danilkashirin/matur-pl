@@ -1,7 +1,7 @@
-array<int> a = random(100000);
+array<int> a = random(1000);
 int temp = 0;
 
-int size = 100000;
+int size = 1000;
 int size_2 = size - 1;
 
 for i in <size> {
@@ -18,3 +18,5 @@ for i in <size> {
 for i in <size> {
     print(a[i]);
 };
+
+jawohl;

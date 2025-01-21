@@ -21,7 +21,6 @@
   <component name="CMakeRunConfigurationManager">
     <generated>
       <config projectName="matur_pl" targetName="matur_pl" />
-      <config projectName="matur_pl" targetName="ast" />
       <config projectName="matur_pl" targetName="omp_gen" />
       <config projectName="matur_pl" targetName="acc_gen" />
       <config projectName="matur_pl" targetName="intrinsics_gen" />
@@ -38,8 +37,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b5f549d8-70d6-4289-87c0-482e76c7e5fa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/cmake-build-debug/test_1.mpl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vm/ASTToBytecodeConverter.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vm/ASTToBytecodeConverter.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vm/GarbageCollector.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vm/GarbageCollector.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vm/VirtualMachine.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vm/VirtualMachine.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast/ASTNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/ASTNode.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast/ArithmeticOpNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/ArithmeticOpNode.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast/ArrayAST.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/ArrayAST.h" afterDir="false" />
@@ -49,25 +55,49 @@
       <change beforePath="$PROJECT_DIR$/ast/CompareOpNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/CompareOpNode.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast/ForNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/ForNode.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast/FunctionAST.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/FunctionAST.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast/FunctionNode.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ast/IfNode.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/IfNode.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast/NumberAST.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/NumberAST.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast/PrintAST.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/PrintAST.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ast/VariableAST.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/VariableAST.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ast/WhileAST.h" beforeDir="false" afterPath="$PROJECT_DIR$/ast/WhileAST.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ast/WhileAST.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-0152983713398cbf40af.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/index-2025-01-18T21-55-55-0781.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-ast-Debug-a75b436f132dd5f3bb89.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-llvm-backend-Debug-3a6d7daa87365ce5ef6e.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-matur_pl-Debug-d2442ef6dd46bfb6cdf6.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-parser-Debug-4210024089556e8d8147.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.cmake/api/v1/reply/target-vm-Debug-a9cbde45c0c4b3b9293c.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/matur_pl.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/matur_pl.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lexer/CMakeFiles/lexer.dir/Lexer.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lexer/CMakeFiles/lexer.dir/Lexer.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/lexer/liblexer.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/lexer/liblexer.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/llvm-backend/CMakeFiles/llvm-backend.dir/IRGeneratorV2.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/llvm-backend/CMakeFiles/llvm-backend.dir/IRGeneratorV2.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/llvm-backend/libllvm-backend.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/llvm-backend/libllvm-backend.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/matur_pl" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/matur_pl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/output_native.ll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/output_opt.ll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/parser/CMakeFiles/parser.dir/Parser.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/parser/CMakeFiles/parser.dir/Parser.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/parser/libparser.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/parser/libparser.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/task_1.mpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test_2.mpl" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test_2.mpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/test_3.mpl" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/test_3.mpl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/vm/CMakeFiles/vm.dir/LlvmParser.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/vm/CMakeFiles/vm.dir/LlvmParser.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/vm/libvm.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/vm/libvm.a" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lexer/Lexer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/lexer/Lexer.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lexer/Token.h" beforeDir="false" afterPath="$PROJECT_DIR$/lexer/Token.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/llvm-backend/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/llvm-backend/IRGeneratorV2.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/IRGeneratorV2.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/llvm-backend/IRGeneratorV2.h" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/IRGeneratorV2.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llvm-backend/JITExecutor.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/JITExecutor.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/llvm-backend/JITExecutor.h" beforeDir="false" afterPath="$PROJECT_DIR$/llvm-backend/JITExecutor.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parser/Parser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/parser/Parser.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parser/Parser.h" beforeDir="false" afterPath="$PROJECT_DIR$/parser/Parser.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vm/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vm/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vm/LlvmParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/vm/LlvmParser.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vm/LlvmParser.h" beforeDir="false" afterPath="$PROJECT_DIR$/vm/LlvmParser.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vm/LlvmParser.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vm/LlvmParser.h" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -570,7 +600,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/igor-mesh/Documents/ITMO/matur-pl-draft 2&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/lexer&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -581,7 +611,11 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lexer" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/vm" />
       <recent name="$PROJECT_DIR$/llvm-backend" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/llvm" />
@@ -609,11 +643,6 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ast" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="matur_pl" TARGET_NAME="ast" CONFIG_NAME="Debug">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="intrinsics_gen" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="matur_pl" TARGET_NAME="intrinsics_gen" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -644,7 +673,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="matur_pl" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="script.mpl" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="matur_pl" TARGET_NAME="matur_pl" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="matur_pl" RUN_TARGET_NAME="matur_pl">
+    <configuration name="matur_pl" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="task_2.mpl" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="matur_pl" TARGET_NAME="matur_pl" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="matur_pl" RUN_TARGET_NAME="matur_pl">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -690,7 +719,6 @@
       <item itemvalue="CMake Application.llvm-backend" />
       <item itemvalue="CMake Application.matur_pl" />
       <item itemvalue="CMake Application.matur_pl_opt" />
-      <item itemvalue="CMake Application.ast" />
       <item itemvalue="CMake Application.omp_gen" />
       <item itemvalue="CMake Application.lexer" />
       <item itemvalue="CMake Application.parser" />
@@ -729,6 +757,8 @@
       <workItem from="1736795897552" duration="13233000" />
       <workItem from="1736877531607" duration="1871000" />
       <workItem from="1736882160701" duration="4819000" />
+      <workItem from="1737291929473" duration="22380000" />
+      <workItem from="1737399622949" duration="17978000" />
     </task>
     <servers />
   </component>
@@ -740,6 +770,17 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/parser/Parser.cpp</url>
+          <line>27</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

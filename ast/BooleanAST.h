@@ -10,8 +10,15 @@ class BooleanAST : public ASTNode {
 
   [[nodiscard]] bool getValue() const { return value; }
 
-  std::vector<std::string> getVariableNames() override {
-    return std::vector<std::string>();
+  std::vector<std::tuple<std::string, std::vector<int64_t>>> generateBytecode(size_t currentOffset) const override {
+    std::vector<std::tuple<std::string, std::vector<int64_t>>> bytecode;
+
+    std::string operation = "LOAD_CONST";
+    std::vector<int64_t> operands = {getValue()};
+
+    bytecode.emplace_back(operation, operands);
+
+    return bytecode;
   }
 
  private:

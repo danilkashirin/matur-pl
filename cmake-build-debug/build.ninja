@@ -47,7 +47,7 @@ cmake_ninja_workdir = /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmak
 #############################################
 # Order-only phony target for matur_pl
 
-build cmake_object_order_depends_target_matur_pl: phony || ast/ast cmake_object_order_depends_target_lexer cmake_object_order_depends_target_llvm-backend cmake_object_order_depends_target_parser cmake_object_order_depends_target_vm
+build cmake_object_order_depends_target_matur_pl: phony || cmake_object_order_depends_target_lexer cmake_object_order_depends_target_llvm-backend cmake_object_order_depends_target_parser cmake_object_order_depends_target_vm
 
 build CMakeFiles/matur_pl.dir/main.cpp.o: CXX_COMPILER__matur_pl_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/main.cpp || cmake_object_order_depends_target_matur_pl
   DEP_FILE = CMakeFiles/matur_pl.dir/main.cpp.o.d
@@ -64,7 +64,7 @@ build CMakeFiles/matur_pl.dir/main.cpp.o: CXX_COMPILER__matur_pl_unscanned_Debug
 #############################################
 # Link the executable matur_pl
 
-build matur_pl: CXX_EXECUTABLE_LINKER__matur_pl_Debug CMakeFiles/matur_pl.dir/main.cpp.o | parser/libparser.a llvm-backend/libllvm-backend.a vm/libvm.a lexer/liblexer.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcJIT.a /opt/homebrew/opt/llvm@15/lib/libLLVMPasses.a /opt/homebrew/opt/llvm@15/lib/libLLVMCoroutines.a /opt/homebrew/opt/llvm@15/lib/libLLVMipo.a /opt/homebrew/opt/llvm@15/lib/libLLVMFrontendOpenMP.a /opt/homebrew/opt/llvm@15/lib/libLLVMIRReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMAsmParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMLinker.a /opt/homebrew/opt/llvm@15/lib/libLLVMObjCARCOpts.a /opt/homebrew/opt/llvm@15/lib/libLLVMVectorize.a /opt/homebrew/opt/llvm@15/lib/libLLVMInstrumentation.a /opt/homebrew/opt/llvm@15/lib/libLLVMJITLink.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCJIT.a /opt/homebrew/opt/llvm@15/lib/libLLVMInterpreter.a /opt/homebrew/opt/llvm@15/lib/libLLVMExecutionEngine.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcTargetProcess.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcShared.a /opt/homebrew/opt/llvm@15/lib/libLLVMRuntimeDyld.a /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libffi.tbd /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64CodeGen.a /opt/homebrew/opt/llvm@15/lib/libLLVMAsmPrinter.a /opt/homebrew/opt/llvm@15/lib/libLLVMGlobalISel.a /opt/homebrew/opt/llvm@15/lib/libLLVMSelectionDAG.a /opt/homebrew/opt/llvm@15/lib/libLLVMCodeGen.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitWriter.a /opt/homebrew/opt/llvm@15/lib/libLLVMTarget.a /opt/homebrew/opt/llvm@15/lib/libLLVMScalarOpts.a /opt/homebrew/opt/llvm@15/lib/libLLVMAggressiveInstCombine.a /opt/homebrew/opt/llvm@15/lib/libLLVMInstCombine.a /opt/homebrew/opt/llvm@15/lib/libLLVMTransformUtils.a /opt/homebrew/opt/llvm@15/lib/libLLVMAnalysis.a /opt/homebrew/opt/llvm@15/lib/libLLVMProfileData.a /opt/homebrew/opt/llvm@15/lib/libLLVMSymbolize.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoDWARF.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoPDB.a /opt/homebrew/opt/llvm@15/lib/libLLVMObject.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMTextAPI.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoMSF.a /opt/homebrew/opt/llvm@15/lib/libLLVMCFGuard.a /opt/homebrew/opt/llvm@15/lib/libLLVMCore.a /opt/homebrew/opt/llvm@15/lib/libLLVMRemarks.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitstreamReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64AsmParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Disassembler.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Desc.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCDisassembler.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Info.a /opt/homebrew/opt/llvm@15/lib/libLLVMMC.a /opt/homebrew/opt/llvm@15/lib/libLLVMBinaryFormat.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoCodeView.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Utils.a /opt/homebrew/opt/llvm@15/lib/libLLVMSupport.a /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libz.tbd /opt/homebrew/lib/libzstd.dylib /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurses.tbd /opt/homebrew/opt/llvm@15/lib/libLLVMDemangle.a || ast/ast lexer/liblexer.a llvm-backend/libllvm-backend.a parser/libparser.a vm/libvm.a
+build matur_pl: CXX_EXECUTABLE_LINKER__matur_pl_Debug CMakeFiles/matur_pl.dir/main.cpp.o | parser/libparser.a llvm-backend/libllvm-backend.a vm/libvm.a lexer/liblexer.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcJIT.a /opt/homebrew/opt/llvm@15/lib/libLLVMPasses.a /opt/homebrew/opt/llvm@15/lib/libLLVMCoroutines.a /opt/homebrew/opt/llvm@15/lib/libLLVMipo.a /opt/homebrew/opt/llvm@15/lib/libLLVMFrontendOpenMP.a /opt/homebrew/opt/llvm@15/lib/libLLVMIRReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMAsmParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMLinker.a /opt/homebrew/opt/llvm@15/lib/libLLVMObjCARCOpts.a /opt/homebrew/opt/llvm@15/lib/libLLVMVectorize.a /opt/homebrew/opt/llvm@15/lib/libLLVMInstrumentation.a /opt/homebrew/opt/llvm@15/lib/libLLVMJITLink.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCJIT.a /opt/homebrew/opt/llvm@15/lib/libLLVMInterpreter.a /opt/homebrew/opt/llvm@15/lib/libLLVMExecutionEngine.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcTargetProcess.a /opt/homebrew/opt/llvm@15/lib/libLLVMOrcShared.a /opt/homebrew/opt/llvm@15/lib/libLLVMRuntimeDyld.a /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libffi.tbd /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64CodeGen.a /opt/homebrew/opt/llvm@15/lib/libLLVMAsmPrinter.a /opt/homebrew/opt/llvm@15/lib/libLLVMGlobalISel.a /opt/homebrew/opt/llvm@15/lib/libLLVMSelectionDAG.a /opt/homebrew/opt/llvm@15/lib/libLLVMCodeGen.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitWriter.a /opt/homebrew/opt/llvm@15/lib/libLLVMTarget.a /opt/homebrew/opt/llvm@15/lib/libLLVMScalarOpts.a /opt/homebrew/opt/llvm@15/lib/libLLVMAggressiveInstCombine.a /opt/homebrew/opt/llvm@15/lib/libLLVMInstCombine.a /opt/homebrew/opt/llvm@15/lib/libLLVMTransformUtils.a /opt/homebrew/opt/llvm@15/lib/libLLVMAnalysis.a /opt/homebrew/opt/llvm@15/lib/libLLVMProfileData.a /opt/homebrew/opt/llvm@15/lib/libLLVMSymbolize.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoDWARF.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoPDB.a /opt/homebrew/opt/llvm@15/lib/libLLVMObject.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMTextAPI.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoMSF.a /opt/homebrew/opt/llvm@15/lib/libLLVMCFGuard.a /opt/homebrew/opt/llvm@15/lib/libLLVMCore.a /opt/homebrew/opt/llvm@15/lib/libLLVMRemarks.a /opt/homebrew/opt/llvm@15/lib/libLLVMBitstreamReader.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64AsmParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCParser.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Disassembler.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Desc.a /opt/homebrew/opt/llvm@15/lib/libLLVMMCDisassembler.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Info.a /opt/homebrew/opt/llvm@15/lib/libLLVMMC.a /opt/homebrew/opt/llvm@15/lib/libLLVMBinaryFormat.a /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoCodeView.a /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Utils.a /opt/homebrew/opt/llvm@15/lib/libLLVMSupport.a /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libz.tbd /opt/homebrew/lib/libzstd.dylib /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurses.tbd /opt/homebrew/opt/llvm@15/lib/libLLVMDemangle.a || lexer/liblexer.a llvm-backend/libllvm-backend.a parser/libparser.a vm/libvm.a
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LINK_FLAGS = -L/opt/homebrew/Cellar/llvm@15/15.0.7/lib -L/usr/local/opt/llvm/lib
   LINK_LIBRARIES = parser/libparser.a  llvm-backend/libllvm-backend.a  vm/libvm.a  lexer/liblexer.a  /opt/homebrew/opt/llvm@15/lib/libLLVMOrcJIT.a  /opt/homebrew/opt/llvm@15/lib/libLLVMPasses.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCoroutines.a  /opt/homebrew/opt/llvm@15/lib/libLLVMipo.a  /opt/homebrew/opt/llvm@15/lib/libLLVMFrontendOpenMP.a  /opt/homebrew/opt/llvm@15/lib/libLLVMIRReader.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAsmParser.a  /opt/homebrew/opt/llvm@15/lib/libLLVMLinker.a  /opt/homebrew/opt/llvm@15/lib/libLLVMObjCARCOpts.a  /opt/homebrew/opt/llvm@15/lib/libLLVMVectorize.a  /opt/homebrew/opt/llvm@15/lib/libLLVMInstrumentation.a  /opt/homebrew/opt/llvm@15/lib/libLLVMJITLink.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMCJIT.a  /opt/homebrew/opt/llvm@15/lib/libLLVMInterpreter.a  /opt/homebrew/opt/llvm@15/lib/libLLVMExecutionEngine.a  /opt/homebrew/opt/llvm@15/lib/libLLVMOrcTargetProcess.a  /opt/homebrew/opt/llvm@15/lib/libLLVMOrcShared.a  /opt/homebrew/opt/llvm@15/lib/libLLVMRuntimeDyld.a  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libffi.tbd  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64CodeGen.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAsmPrinter.a  /opt/homebrew/opt/llvm@15/lib/libLLVMGlobalISel.a  /opt/homebrew/opt/llvm@15/lib/libLLVMSelectionDAG.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCodeGen.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBitWriter.a  /opt/homebrew/opt/llvm@15/lib/libLLVMTarget.a  /opt/homebrew/opt/llvm@15/lib/libLLVMScalarOpts.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAggressiveInstCombine.a  /opt/homebrew/opt/llvm@15/lib/libLLVMInstCombine.a  /opt/homebrew/opt/llvm@15/lib/libLLVMTransformUtils.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAnalysis.a  /opt/homebrew/opt/llvm@15/lib/libLLVMProfileData.a  /opt/homebrew/opt/llvm@15/lib/libLLVMSymbolize.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoDWARF.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoPDB.a  /opt/homebrew/opt/llvm@15/lib/libLLVMObject.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBitReader.a  /opt/homebrew/opt/llvm@15/lib/libLLVMTextAPI.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoMSF.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCFGuard.a  /opt/homebrew/opt/llvm@15/lib/libLLVMCore.a  /opt/homebrew/opt/llvm@15/lib/libLLVMRemarks.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBitstreamReader.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64AsmParser.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMCParser.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Disassembler.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Desc.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMCDisassembler.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Info.a  /opt/homebrew/opt/llvm@15/lib/libLLVMMC.a  /opt/homebrew/opt/llvm@15/lib/libLLVMBinaryFormat.a  /opt/homebrew/opt/llvm@15/lib/libLLVMDebugInfoCodeView.a  /opt/homebrew/opt/llvm@15/lib/libLLVMAArch64Utils.a  /opt/homebrew/opt/llvm@15/lib/libLLVMSupport.a  -lm  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libz.tbd  /opt/homebrew/lib/libzstd.dylib  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/lib/libcurses.tbd  /opt/homebrew/opt/llvm@15/lib/libLLVMDemangle.a
@@ -125,12 +125,6 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 # Write statements declared in CMakeLists.txt:
 # /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/CMakeLists.txt
 # =============================================================================
-
-
-#############################################
-# Utility command for ast
-
-build ast/ast: phony
 
 
 #############################################
@@ -276,7 +270,7 @@ build lexer/rebuild_cache: phony lexer/CMakeFiles/rebuild_cache.util
 #############################################
 # Order-only phony target for parser
 
-build cmake_object_order_depends_target_parser: phony || ast/ast cmake_object_order_depends_target_lexer
+build cmake_object_order_depends_target_parser: phony || cmake_object_order_depends_target_lexer
 
 build parser/CMakeFiles/parser.dir/Parser.cpp.o: CXX_COMPILER__parser_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/parser/Parser.cpp || cmake_object_order_depends_target_parser
   DEP_FILE = parser/CMakeFiles/parser.dir/Parser.cpp.o.d
@@ -293,7 +287,7 @@ build parser/CMakeFiles/parser.dir/Parser.cpp.o: CXX_COMPILER__parser_unscanned_
 #############################################
 # Link the static library parser/libparser.a
 
-build parser/libparser.a: CXX_STATIC_LIBRARY_LINKER__parser_Debug parser/CMakeFiles/parser.dir/Parser.cpp.o || ast/ast lexer/liblexer.a
+build parser/libparser.a: CXX_STATIC_LIBRARY_LINKER__parser_Debug parser/CMakeFiles/parser.dir/Parser.cpp.o || lexer/liblexer.a
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = parser/CMakeFiles/parser.dir
@@ -397,6 +391,22 @@ build llvm-backend/CMakeFiles/llvm-backend.dir/IRGeneratorV2.cpp.o: CXX_COMPILER
   OBJECT_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
   OBJECT_FILE_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
 
+build llvm-backend/CMakeFiles/llvm-backend.dir/__/vm/ASTToBytecodeConverter.cpp.o: CXX_COMPILER__llvm-backend_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/vm/ASTToBytecodeConverter.cpp || cmake_object_order_depends_target_llvm-backend
+  DEFINES = -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS
+  DEP_FILE = llvm-backend/CMakeFiles/llvm-backend.dir/__/vm/ASTToBytecodeConverter.cpp.o.d
+  FLAGS = -fPIC -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wimplicit-fallthrough -Wcovered-switch-default -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wsuggest-override -Wstring-conversion -Wmisleading-indentation -fdiagnostics-color -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
+  INCLUDES = -I/opt/homebrew/opt/llvm@15/include -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend/../ast -isystem /opt/homebrew/include
+  OBJECT_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
+  OBJECT_FILE_DIR = llvm-backend/CMakeFiles/llvm-backend.dir/__/vm
+
+build llvm-backend/CMakeFiles/llvm-backend.dir/__/vm/VirtualMachine.cpp.o: CXX_COMPILER__llvm-backend_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/vm/VirtualMachine.cpp || cmake_object_order_depends_target_llvm-backend
+  DEFINES = -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D__STDC_LIMIT_MACROS
+  DEP_FILE = llvm-backend/CMakeFiles/llvm-backend.dir/__/vm/VirtualMachine.cpp.o.d
+  FLAGS = -fPIC -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wimplicit-fallthrough -Wcovered-switch-default -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wsuggest-override -Wstring-conversion -Wmisleading-indentation -fdiagnostics-color -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
+  INCLUDES = -I/opt/homebrew/opt/llvm@15/include -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/llvm-backend/../ast -isystem /opt/homebrew/include
+  OBJECT_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
+  OBJECT_FILE_DIR = llvm-backend/CMakeFiles/llvm-backend.dir/__/vm
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target llvm-backend
@@ -405,7 +415,7 @@ build llvm-backend/CMakeFiles/llvm-backend.dir/IRGeneratorV2.cpp.o: CXX_COMPILER
 #############################################
 # Link the static library llvm-backend/libllvm-backend.a
 
-build llvm-backend/libllvm-backend.a: CXX_STATIC_LIBRARY_LINKER__llvm-backend_Debug llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o llvm-backend/CMakeFiles/llvm-backend.dir/IRGeneratorV2.cpp.o || /opt/homebrew/lib/libzstd.dylib
+build llvm-backend/libllvm-backend.a: CXX_STATIC_LIBRARY_LINKER__llvm-backend_Debug llvm-backend/CMakeFiles/llvm-backend.dir/JITExecutor.cpp.o llvm-backend/CMakeFiles/llvm-backend.dir/IRGeneratorV2.cpp.o llvm-backend/CMakeFiles/llvm-backend.dir/__/vm/ASTToBytecodeConverter.cpp.o llvm-backend/CMakeFiles/llvm-backend.dir/__/vm/VirtualMachine.cpp.o || /opt/homebrew/lib/libzstd.dylib
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LANGUAGE_COMPILE_FLAGS = -fPIC -fvisibility-inlines-hidden -Werror=date-time -Werror=unguarded-availability-new -Wall -Wextra -Wno-unused-parameter -Wwrite-strings -Wcast-qual -Wmissing-field-initializers -Wimplicit-fallthrough -Wcovered-switch-default -Wno-noexcept-type -Wnon-virtual-dtor -Wdelete-non-virtual-dtor -Wsuggest-override -Wstring-conversion -Wmisleading-indentation -fdiagnostics-color -g
   OBJECT_DIR = llvm-backend/CMakeFiles/llvm-backend.dir
@@ -475,8 +485,8 @@ build llvm-backend/rebuild_cache: phony llvm-backend/CMakeFiles/rebuild_cache.ut
 
 build cmake_object_order_depends_target_vm: phony || vm/CMakeFiles/vm.dir
 
-build vm/CMakeFiles/vm.dir/LlvmParser.cpp.o: CXX_COMPILER__vm_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/vm/LlvmParser.cpp || cmake_object_order_depends_target_vm
-  DEP_FILE = vm/CMakeFiles/vm.dir/LlvmParser.cpp.o.d
+build vm/CMakeFiles/vm.dir/GarbageCollector.cpp.o: CXX_COMPILER__vm_unscanned_Debug /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/vm/GarbageCollector.cpp || cmake_object_order_depends_target_vm
+  DEP_FILE = vm/CMakeFiles/vm.dir/GarbageCollector.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/vm
   OBJECT_DIR = vm/CMakeFiles/vm.dir
@@ -490,7 +500,7 @@ build vm/CMakeFiles/vm.dir/LlvmParser.cpp.o: CXX_COMPILER__vm_unscanned_Debug /U
 #############################################
 # Link the static library vm/libvm.a
 
-build vm/libvm.a: CXX_STATIC_LIBRARY_LINKER__vm_Debug vm/CMakeFiles/vm.dir/LlvmParser.cpp.o
+build vm/libvm.a: CXX_STATIC_LIBRARY_LINKER__vm_Debug vm/CMakeFiles/vm.dir/GarbageCollector.cpp.o
   ARCH_FLAGS = -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = vm/CMakeFiles/vm.dir
@@ -551,8 +561,6 @@ build vm/rebuild_cache: phony vm/CMakeFiles/rebuild_cache.util
 
 build acc_gen: phony llvm-backend/acc_gen
 
-build ast: phony ast/ast
-
 build intrinsics_gen: phony llvm-backend/intrinsics_gen
 
 build lexer: phony lexer/liblexer.a
@@ -588,7 +596,7 @@ build all: phony matur_pl ast/all lexer/all parser/all llvm-backend/all vm/all
 #############################################
 # Folder: /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/ast
 
-build ast/all: phony ast/ast
+build ast/all: phony
 
 # =============================================================================
 

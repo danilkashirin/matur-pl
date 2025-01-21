@@ -3,7 +3,6 @@
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/CMakeFiles/package_source.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/CMakeFiles/edit_cache.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/ast/CMakeFiles/ast.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/ast/CMakeFiles/package.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/ast/CMakeFiles/package_source.dir
 /Users/danilkasirin/projects_C/5sem/pl/matur-pl-draft/cmake-build-debug/ast/CMakeFiles/edit_cache.dir

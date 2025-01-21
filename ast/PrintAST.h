@@ -12,9 +12,13 @@ class PrintAST : public ASTNode {
 
   [[nodiscard]] const ASTNode* getExpression() const { return expression.get(); }
 
-  std::vector<std::string> getVariableNames() override {
-    return expression->getVariableNames();
+  std::vector<std::tuple<std::string, std::vector<int64_t>>> generateBytecode(size_t currentOffset) const override {
+    auto expressionBytecode = expression->generateBytecode(currentOffset);
+    currentOffset += expressionBytecode.size();
+    expressionBytecode.emplace_back("PRINT", std::vector<int64_t>());
+    return expressionBytecode;
   }
+
 
  private:
   std::unique_ptr<ASTNode> expression;

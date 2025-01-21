@@ -15,7 +15,9 @@
 #include "IfNode.h"
 #include "ArithmeticOpNode.h"
 #include "AssigmentAST.h"
+#include "FunctionAST.h"
 #include <llvm/IRReader/IRReader.h>
+#include <llvm/IR/Verifier.h>
 
 #include <llvm/IR/LegacyPassManager.h>
 #include <llvm/Transforms/Utils.h>
@@ -23,17 +25,27 @@
 #include <llvm/Transforms/Scalar.h>
 #include <llvm/Transforms/Scalar/GVN.h>
 
-std::map<std::string, llvm::AllocaInst*> namedValues;
+std::map<std::string, llvm::AllocaInst*> globalNamedValues;
 
-llvm::Value* generateIRForNumber(const NumberAST* node, llvm::IRBuilder<>& builder) {
+llvm::Value* generateIRForNumber(const NumberAST* node, llvm::IRBuilder<>& builder,
+                                 llvm::Module& module,
+                                 llvm::Function* parentFunction,
+                                 std::map<std::string, llvm::AllocaInst*>& namedValues) {
   return llvm::ConstantInt::get(builder.getInt64Ty(), node->getValue());
 }
 
-llvm::Value* generateIRForBoolean(const BooleanAST* node, llvm::IRBuilder<>& builder) {
+llvm::Value* generateIRForBoolean(const BooleanAST* node, llvm::IRBuilder<>& builder,
+                                  llvm::Module& module,
+                                  llvm::Function* parentFunction,
+                                  std::map<std::string, llvm::AllocaInst*>& namedValues) {
   return llvm::ConstantInt::get(builder.getInt1Ty(), node->getValue());
 }
 
-llvm::Value* generateIRForVariableDecl(const VariableDeclAST* node, llvm::IRBuilder<>& builder, llvm::Module& module, llvm::Function* parentFunction) {
+llvm::Value* generateIRForVariableDecl(const VariableDeclAST* node,
+                                       llvm::IRBuilder<>& builder,
+                                       llvm::Module& module,
+                                       llvm::Function* parentFunction,
+                                       std::map<std::string, llvm::AllocaInst*>& namedValues) {
   llvm::Type* type;
   if (node->getType() == "int") {
     type = builder.getInt64Ty();
@@ -49,30 +61,19 @@ llvm::Value* generateIRForVariableDecl(const VariableDeclAST* node, llvm::IRBuil
     namedValues[node->getName()] = alloca;
   }
 
-  llvm::Value* initialValue = generateIR(node->getValue(), builder, module, parentFunction);
+  llvm::Value* initialValue = generateIR(node->getValue(), builder, module, parentFunction, namedValues);
   builder.CreateStore(initialValue, alloca);
 
   return alloca;
 }
 
-llvm::Value* generateIRForVariableAssign(const VariableAssignAST* node,
-                                         llvm::IRBuilder<>& builder,
-                                         llvm::Module& module,
-                                         llvm::Function* parentFunction) {
-  llvm::Value* value = generateIR(node->getValue(), builder, module, parentFunction);
-
-  llvm::AllocaInst* variable = namedValues[node->getName()];
-  if (!variable) {
-    llvm::errs() << "Cannot find the variable: " << node->getName() << "\n";
-    return nullptr;
-  }
-
-  builder.CreateStore(value, variable);
-  return value;
-}
-
-llvm::Value* generateIRForVariableRef(const VariableRefAST* node, llvm::IRBuilder<>& builder, llvm::Module& module, llvm::Function* parentFunction) {
-  llvm::AllocaInst* variable = namedValues[node->getName()];
+llvm::Value* generateIRForVariableRef(const VariableRefAST* node,
+                                      llvm::IRBuilder<>& builder,
+                                      llvm::Module& module,
+                                      llvm::Function* parentFunction,
+                                      std::map<std::string, llvm::AllocaInst*>& namedValues) {
+  llvm::AllocaInst* variable;
+  variable = namedValues[node->getName()];
   if (!variable) {
     llvm::errs() << "Cannot find the variable: " << node->getName() << "\n";
     return nullptr;
@@ -80,8 +81,12 @@ llvm::Value* generateIRForVariableRef(const VariableRefAST* node, llvm::IRBuilde
   return variable;
 }
 
-llvm::Value* generateIRForPrint(const PrintAST* node, llvm::IRBuilder<>& builder, llvm::Module& module, llvm::Function* parentFunction) {
-  llvm::Value* expressionValue = generateIR(node->getExpression(), builder, module, parentFunction);
+llvm::Value* generateIRForPrint(const PrintAST* node,
+                                llvm::IRBuilder<>& builder,
+                                llvm::Module& module,
+                                llvm::Function* parentFunction,
+                                std::map<std::string, llvm::AllocaInst*>& namedValues) {
+  llvm::Value* expressionValue = generateIR(node->getExpression(), builder, module, parentFunction, namedValues);
 
   llvm::FunctionType* printfType = llvm::FunctionType::get(builder.getInt64Ty(), {builder.getInt8PtrTy()}, true);
   llvm::FunctionCallee printfFunc = module.getOrInsertFunction("printf", printfType);
@@ -91,10 +96,14 @@ llvm::Value* generateIRForPrint(const PrintAST* node, llvm::IRBuilder<>& builder
   return builder.CreateCall(printfFunc, {formatStr, expressionValue});
 }
 
-llvm::Value* generateIRForIfNode(const IfNode* node, llvm::IRBuilder<>& builder, llvm::Module& module, llvm::Function* parentFunction) {
+llvm::Value* generateIRForIfNode(const IfNode* node,
+                                 llvm::IRBuilder<>& builder,
+                                 llvm::Module& module,
+                                 llvm::Function* parentFunction,
+                                 std::map<std::string, llvm::AllocaInst*>& namedValues) {
   llvm::LLVMContext& context = builder.getContext();
 
-  llvm::Value* conditionValue = generateIR(node->getCondition(), builder, module, parentFunction);
+  llvm::Value* conditionValue = generateIR(node->getCondition(), builder, module, parentFunction, namedValues);
   if (!conditionValue) {
     llvm::errs() << "Failed to generate condition IR\n";
     return nullptr;
@@ -110,14 +119,14 @@ llvm::Value* generateIRForIfNode(const IfNode* node, llvm::IRBuilder<>& builder,
 
   builder.SetInsertPoint(thenBB);
   for (const auto& thenNode : node->getThenBody()) {
-    generateIR(thenNode.get(), builder, module, parentFunction);
+    generateIR(thenNode.get(), builder, module, parentFunction, namedValues);
   }
   builder.CreateBr(mergeBB);
 
   parentFunction->getBasicBlockList().push_back(elseBB);
   builder.SetInsertPoint(elseBB);
   for (const auto& elseNode : node->getElseBody()) {
-    generateIR(elseNode.get(), builder, module, parentFunction);
+    generateIR(elseNode.get(), builder, module, parentFunction, namedValues);
   }
   builder.CreateBr(mergeBB);
 
@@ -130,9 +139,10 @@ llvm::Value* generateIRForIfNode(const IfNode* node, llvm::IRBuilder<>& builder,
 llvm::Value* generateIRForArithmeticOpNode(const ArithmeticOpNode* node,
                                            llvm::IRBuilder<>& builder,
                                            llvm::Module& module,
-                                           llvm::Function* parentFunction) {
-  llvm::Value* leftValue = generateIR(node->getLeft(), builder, module, parentFunction);
-  llvm::Value* rightValue = generateIR(node->getRight(), builder, module, parentFunction);
+                                           llvm::Function* parentFunction,
+                                           std::map<std::string, llvm::AllocaInst*>& namedValues) {
+  llvm::Value* leftValue = generateIR(node->getLeft(), builder, module, parentFunction, namedValues);
+  llvm::Value* rightValue = generateIR(node->getRight(), builder, module, parentFunction, namedValues);
   if (!leftValue || !rightValue) {
     llvm::errs() << "Failed to generate IR for operands of arithmetic operation\n";
     return nullptr;
@@ -153,9 +163,13 @@ llvm::Value* generateIRForArithmeticOpNode(const ArithmeticOpNode* node,
   return nullptr;
 }
 
-llvm::Value* generateIRForCompareOpNode(const CompareOpNode* node, llvm::IRBuilder<>& builder, llvm::Module& module, llvm::Function* parentFunction) {
-  llvm::Value* leftValue = generateIR(node->getLeft(), builder, module, parentFunction);
-  llvm::Value* rightValue = generateIR(node->getRight(), builder, module, parentFunction);
+llvm::Value* generateIRForCompareOpNode(const CompareOpNode* node,
+                                        llvm::IRBuilder<>& builder,
+                                        llvm::Module& module,
+                                        llvm::Function* parentFunction,
+                                        std::map<std::string, llvm::AllocaInst*>& namedValues) {
+  llvm::Value* leftValue = generateIR(node->getLeft(), builder, module, parentFunction, namedValues);
+  llvm::Value* rightValue = generateIR(node->getRight(), builder, module, parentFunction, namedValues);
 
   if (!leftValue || !rightValue) {
     llvm::errs() << "Failed to generate IR for operands of compare operation\n";
@@ -174,7 +188,11 @@ llvm::Value* generateIRForCompareOpNode(const CompareOpNode* node, llvm::IRBuild
   }
 }
 
-llvm::Value* generateIRForArrayDecl(const ArrayDeclAST* node, llvm::IRBuilder<>& builder, llvm::Module& module, llvm::Function* parentFunction) {
+llvm::Value* generateIRForArrayDecl(const ArrayDeclAST* node,
+                                    llvm::IRBuilder<>& builder,
+                                    llvm::Module& module,
+                                    llvm::Function* parentFunction,
+                                    std::map<std::string, llvm::AllocaInst*>& namedValues) {
   llvm::LLVMContext& context = module.getContext();
 
   llvm::Type* elementType;
@@ -213,8 +231,12 @@ llvm::Value* generateIRForArrayDecl(const ArrayDeclAST* node, llvm::IRBuilder<>&
   return arrayVar;
 }
 
-llvm::Value* generateIRForArrayAccess(const ArrayAccessAST* node, llvm::IRBuilder<>& builder, llvm::Module& module, llvm::Function* parentFunction) {
-  llvm::Value* indexValue = generateIR(node->getIndex(), builder, module, parentFunction);
+llvm::Value* generateIRForArrayAccess(const ArrayAccessAST* node,
+                                      llvm::IRBuilder<>& builder,
+                                      llvm::Module& module,
+                                      llvm::Function* parentFunction,
+                                      std::map<std::string, llvm::AllocaInst*>& namedValues) {
+  llvm::Value* indexValue = generateIR(node->getIndex(), builder, module, parentFunction, namedValues);
   if (!indexValue) {
     llvm::errs() << "Failed to generate IR for array index\n";
     return nullptr;
@@ -239,9 +261,13 @@ llvm::Value* generateIRForArrayAccess(const ArrayAccessAST* node, llvm::IRBuilde
   return elementPtr;
 }
 
-llvm::Value* generateIRForAssignment(const AssignmentAST* node, llvm::IRBuilder<>& builder, llvm::Module& module, llvm::Function* parentFunction) {
+llvm::Value* generateIRForAssignment(const AssignmentAST* node,
+                                     llvm::IRBuilder<>& builder,
+                                     llvm::Module& module,
+                                     llvm::Function* parentFunction,
+                                     std::map<std::string, llvm::AllocaInst*>& namedValues) {
   llvm::Value* rhsValue = nullptr;
-  rhsValue = generateIR(node->getRHS(), builder, module, parentFunction);
+  rhsValue = generateIR(node->getRHS(), builder, module, parentFunction, namedValues);
 
   if (!rhsValue) {
     throw std::runtime_error("Failed to generate RHS value for assignment");
@@ -250,9 +276,9 @@ llvm::Value* generateIRForAssignment(const AssignmentAST* node, llvm::IRBuilder<
   llvm::Value* lhsLocation = nullptr;
 
   if (auto* varRefAST = dynamic_cast<const VariableRefAST*>(node->getLHS())) {
-    lhsLocation = generateIRForVariableRef(varRefAST, builder, module, parentFunction);
+    lhsLocation = generateIRForVariableRef(varRefAST, builder, module, parentFunction, namedValues);
   } else if (auto* arrayAccess = dynamic_cast<const ArrayAccessAST*>(node->getLHS())) {
-    lhsLocation = generateIRForArrayAccess(arrayAccess, builder, module, parentFunction);
+    lhsLocation = generateIRForArrayAccess(arrayAccess, builder, module, parentFunction, namedValues);
   } else {
     throw std::runtime_error("Left-hand side of assignment is not assignable");
   }
@@ -267,58 +293,66 @@ llvm::Value* generateIRForAssignment(const AssignmentAST* node, llvm::IRBuilder<
 llvm::Value* generateIR(const ASTNode* node,
                         llvm::IRBuilder<>& builder,
                         llvm::Module& module,
-                        llvm::Function* parentFunction) {
+                        llvm::Function* parentFunction,
+                        std::map<std::string, llvm::AllocaInst*>& namedValues) {
   if (auto boolNode = dynamic_cast<const BooleanAST*>(node)) {
-    return generateIRForBoolean(boolNode, builder);
+    return generateIRForBoolean(boolNode, builder, module, parentFunction, namedValues);
   }
   if (auto numNode = dynamic_cast<const NumberAST*>(node)) {
-    return generateIRForNumber(numNode, builder);
+    return generateIRForNumber(numNode, builder, module, parentFunction, namedValues);
   }
   if (auto varDeclNode = dynamic_cast<const VariableDeclAST*>(node)) {
-    return generateIRForVariableDecl(varDeclNode, builder, module, parentFunction);
-  }
-  if (auto varAssignNode = dynamic_cast<const VariableAssignAST*>(node)) {
-    return generateIRForVariableAssign(varAssignNode, builder, module, parentFunction);
+    return generateIRForVariableDecl(varDeclNode, builder, module, parentFunction, namedValues);
   }
   if (auto varRefNode = dynamic_cast<const VariableRefAST*>(node)) {
-    llvm::Value* valuePtr = generateIRForVariableRef(varRefNode, builder, module, parentFunction);
+    llvm::Value* valuePtr = generateIRForVariableRef(varRefNode, builder, module, parentFunction, namedValues);
     return builder.CreateLoad(builder.getInt64Ty(), valuePtr, "loadtmp");
   }
   if (auto printNode = dynamic_cast<const PrintAST*>(node)) {
-    return generateIRForPrint(printNode, builder, module, parentFunction);
+    return generateIRForPrint(printNode, builder, module, parentFunction, namedValues);
   }
   if (auto forNode = dynamic_cast<const ForNode*>(node)) {
-    return generateIRForForNode(forNode, builder, module, parentFunction);
+    return generateIRForForNode(forNode, builder, module, parentFunction, namedValues);
   }
   if (auto ifNode = dynamic_cast<const IfNode*>(node)) {
-    return generateIRForIfNode(ifNode, builder, module, parentFunction);
+    return generateIRForIfNode(ifNode, builder, module, parentFunction, namedValues);
   }
   if (auto arithmeticNode = dynamic_cast<const ArithmeticOpNode*>(node)) {
-    return generateIRForArithmeticOpNode(arithmeticNode, builder, module, parentFunction);
+    return generateIRForArithmeticOpNode(arithmeticNode, builder, module, parentFunction, namedValues);
   }
   if (auto arithmeticNode = dynamic_cast<const CompareOpNode*>(node)) {
-    return generateIRForCompareOpNode(arithmeticNode, builder, module, parentFunction);
+    return generateIRForCompareOpNode(arithmeticNode, builder, module, parentFunction, namedValues);
   }
   if (auto arrayDeclNode = dynamic_cast<const ArrayDeclAST*>(node)) {
-    return generateIRForArrayDecl(arrayDeclNode, builder, module, parentFunction);
+    return generateIRForArrayDecl(arrayDeclNode, builder, module, parentFunction, namedValues);
   }
   if (auto arrayAccessNode = dynamic_cast<const ArrayAccessAST*>(node)) {
-    llvm::Value* valuePtr = generateIRForArrayAccess(arrayAccessNode, builder, module, parentFunction);
+    llvm::Value* valuePtr = generateIRForArrayAccess(arrayAccessNode, builder, module, parentFunction, namedValues);
     return builder.CreateLoad(builder.getInt64Ty(), valuePtr, "loadelem");
   }
   if (auto assigmentNode = dynamic_cast<const AssignmentAST*>(node)) {
-    return generateIRForAssignment(assigmentNode, builder, module, parentFunction);
+    return generateIRForAssignment(assigmentNode, builder, module, parentFunction, namedValues);
   }
-
+  if (auto returnNode = dynamic_cast<const ReturnNode*>(node)) {
+    return generateIRForReturn(returnNode, builder, module, parentFunction, namedValues);
+  }
+  if (auto callNode = dynamic_cast<const FunctionCallNode*>(node)) {
+    return generateIRForFunctionCall(callNode, builder, module, parentFunction, namedValues);
+  }
+  throw std::runtime_error("Unhandled AST node type in IR generation.");
   return nullptr;
 }
 
-llvm::Value* generateIRForForNode(const ForNode* forNode, llvm::IRBuilder<>& builder, llvm::Module& module, llvm::Function* parentFunction) {
+llvm::Value* generateIRForForNode(const ForNode* forNode,
+                                  llvm::IRBuilder<>& builder,
+                                  llvm::Module& module,
+                                  llvm::Function* parentFunction,
+                                  std::map<std::string, llvm::AllocaInst*>& namedValues) {
   llvm::LLVMContext& context = builder.getContext();
 
-  llvm::Value* start = generateIR(forNode->getStart(), builder, module, parentFunction);
-  llvm::Value* finish = generateIR(forNode->getFinish(), builder, module, parentFunction);
-  llvm::Value* step = generateIR(forNode->getStep(), builder, module, parentFunction);
+  llvm::Value* start = generateIR(forNode->getStart(), builder, module, parentFunction, namedValues);
+  llvm::Value* finish = generateIR(forNode->getFinish(), builder, module, parentFunction, namedValues);
+  llvm::Value* step = generateIR(forNode->getStep(), builder, module, parentFunction, namedValues);
 
   llvm::BasicBlock* preheaderBB = builder.GetInsertBlock();
   llvm::BasicBlock* loopBB = llvm::BasicBlock::Create(context, "loop", parentFunction);
@@ -336,7 +370,7 @@ llvm::Value* generateIRForForNode(const ForNode* forNode, llvm::IRBuilder<>& bui
   builder.CreateStore(phiNode, alloca);
 
   for (const auto& bodyNode : forNode->getBody()) {
-    generateIR(bodyNode.get(), builder, module, parentFunction);
+    generateIR(bodyNode.get(), builder, module, parentFunction, namedValues);
   }
 
   llvm::Value* currentVar = builder.CreateLoad(start->getType(), alloca);
@@ -351,19 +385,33 @@ llvm::Value* generateIRForForNode(const ForNode* forNode, llvm::IRBuilder<>& bui
   return nullptr;
 }
 
-std::unique_ptr<llvm::Module> generateModuleIR(std::vector<std::unique_ptr<ASTNode>>& astNodes, llvm::LLVMContext& context, bool withOpt) {
+std::unique_ptr<llvm::Module> generateModuleIR(std::vector<std::unique_ptr<ASTNode>>& astNodes,
+                                               llvm::LLVMContext& context,
+                                               bool withOpt) {
   auto module = std::make_unique<llvm::Module>("my_module", context);
   llvm::IRBuilder<> builder(context);
 
-  llvm::FunctionType* funcType = llvm::FunctionType::get(builder.getVoidTy(), false);
-  llvm::Function* mainFunc = llvm::Function::Create(funcType, llvm::Function::ExternalLinkage, "main", *module);
-  llvm::BasicBlock* entry = llvm::BasicBlock::Create(context, "entry", mainFunc);
-  builder.SetInsertPoint(entry);
-
   for (auto& node : astNodes) {
-    generateIR(node.get(), builder, *module, mainFunc);
+    if (auto* funcDeclNode = dynamic_cast<FunctionDeclNode*>(node.get())) {
+      std::map<std::string, llvm::AllocaInst*> funcNamedValues;
+      llvm::Function* function = static_cast<llvm::Function*>(generateIRForFunctionDecl(funcDeclNode,
+                                                                                            builder,
+                                                                                            *module,
+                                                                                            nullptr,
+                                                                                        funcNamedValues));
+      if (!function) {
+        throw std::runtime_error("Function declaration failed to generate");
+      }
+    }
   }
-  builder.CreateRetVoid();
+
+  if (!module->getFunction("main")) {
+    llvm::FunctionType* funcType = llvm::FunctionType::get(builder.getInt64Ty(), false);
+    llvm::Function* mainFunc = llvm::Function::Create(funcType, llvm::Function::ExternalLinkage, "main", *module);
+    llvm::BasicBlock* entry = llvm::BasicBlock::Create(context, "entry", mainFunc);
+    builder.SetInsertPoint(entry);
+    builder.CreateRet(llvm::ConstantInt::get(context, llvm::APInt(64, 0)));
+  }
 
   llvm::legacy::PassManager passManager;
   passManager.add(llvm::createPromoteMemoryToRegisterPass());
@@ -380,9 +428,87 @@ std::unique_ptr<llvm::Module> generateModuleIR(std::vector<std::unique_ptr<ASTNo
 
   std::string outputFilename = withOpt ? "output_opt.ll" : "output_native.ll";
   std::ofstream outputFile(outputFilename);
-  // std::cout << irCode;
+  std::cout << irCode;
   outputFile << irCode;
   outputFile.close();
 
   return module;
+}
+
+llvm::Value* generateIRForReturn(const ReturnNode* returnNode,
+                                     llvm::IRBuilder<>& builder,
+                                     llvm::Module& module,
+                                     llvm::Function* parentFunction,
+                                     std::map<std::string, llvm::AllocaInst*>& namedValues) {
+  if (!returnNode) return nullptr;
+
+  const llvm::Value
+      * returnValue = generateIR(returnNode->getExpression(), builder, module, parentFunction, namedValues);
+  if (!returnValue) return nullptr;
+
+  llvm::Value* returnInstruction = builder.CreateRet(const_cast<llvm::Value*>(returnValue));
+  return returnInstruction;
+}
+
+llvm::Value* generateIRForFunctionDecl(const FunctionDeclNode* functionDeclNode,
+                                       llvm::IRBuilder<>& builder,
+                                       llvm::Module& module,
+                                       llvm::Function* parentFunction,
+                                       std::map<std::string, llvm::AllocaInst*>& namedValues) {
+  if (!functionDeclNode) return nullptr;
+
+  std::vector<llvm::Type*> paramTypes(functionDeclNode->getParameters().size(), builder.getInt64Ty());
+  llvm::FunctionType* funcType = llvm::FunctionType::get(builder.getInt64Ty(), paramTypes, false);
+
+  llvm::Function* function = llvm::Function::Create(funcType, llvm::Function::ExternalLinkage, functionDeclNode->getFunctionName(), module);
+
+  llvm::BasicBlock* BB = llvm::BasicBlock::Create(module.getContext(), "entry", function);
+  builder.SetInsertPoint(BB);
+
+  namedValues.clear();
+  unsigned index = 0;
+  for (auto& arg : function->args()) {
+    std::string argName = functionDeclNode->getParameters()[index];
+    arg.setName(argName);
+
+    llvm::AllocaInst* alloca = builder.CreateAlloca(builder.getInt64Ty(), nullptr, argName);
+    builder.CreateStore(&arg, alloca);
+    namedValues[argName] = alloca;
+
+    ++index;
+  }
+
+  for (const auto& astNode : functionDeclNode->getBody()) {
+    generateIR(astNode.get(), builder, module, function, namedValues);
+  }
+
+  if (!builder.GetInsertBlock()->getTerminator()) {
+    builder.CreateRet(llvm::ConstantInt::get(module.getContext(), llvm::APInt(64, 0)));
+  }
+
+  return function;
+}
+
+llvm::Value* generateIRForFunctionCall(const FunctionCallNode* functionCallNode,
+                                       llvm::IRBuilder<>& builder,
+                                       llvm::Module& module,
+                                       llvm::Function* parentFunction,
+                                       std::map<std::string, llvm::AllocaInst*>& namedValues) {
+  if (!functionCallNode) return nullptr;
+
+  llvm::Function* calleeFunction = module.getFunction(functionCallNode->getFunctionName());
+  if (!calleeFunction) {
+    throw std::runtime_error("Function " + functionCallNode->getFunctionName() + " not found");
+  }
+
+  std::vector<llvm::Value*> args;
+  for (const auto& argNode : functionCallNode->getArguments()) {
+    llvm::Value* argValue = generateIR(argNode.get(), builder, module, parentFunction, namedValues);
+    if (!argValue) {
+      throw std::runtime_error("Failed to generate argument for function call");
+    }
+    args.push_back(argValue);
+  }
+
+  return builder.CreateCall(calleeFunction, args);
 }

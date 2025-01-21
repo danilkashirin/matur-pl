@@ -17,7 +17,6 @@ Token Lexer::getNextToken() {
     return parseIdentifierOrKeyword();
   }
 
-  // Если текущий символ - это цифра или '-' перед цифрой, начнем разбор числа
   if (std::isdigit(current) || (current == '-' && (position + 1 < input.size() && std::isdigit(input[position + 1])))) {
     return parseNumber();
   }
@@ -30,37 +29,53 @@ Token Lexer::getNextToken() {
       }
       position++;
       return {TokenType::Equals, "="};
-    case ';':position++;
+    case ';':
+      position++;
       return {TokenType::Semicolon, ";"};
-    case '(':position++;
+    case '(':
+      position++;
       return {TokenType::LParen, "("};
-    case ')':position++;
+    case ')':
+      position++;
       return {TokenType::RParen, ")"};
-    case '+':position++;
+    case '+':
+      position++;
       return {TokenType::Plus, "+"};
-    case '-':position++;
+    case '-':
+      position++;
       return {TokenType::Minus, "-"};
-    case '*':position++;
+    case '*':
+      position++;
       return {TokenType::Asterisk, "*"};
-    case '/':position++;
+    case '/':
+      position++;
       return {TokenType::Slash, "/"};
-    case '%':position++;
+    case '%':
+      position++;
       return {TokenType::Modulo, "%"};
-    case '<':position++;
+    case '<':
+      position++;
       return {TokenType::LessThan, "<"};
-    case '>':position++;
+    case '>':
+      position++;
       return {TokenType::GreaterThan, ">"};
-    case '[':position++;
+    case '[':
+      position++;
       return {TokenType::LBracket, "["};
-    case ']':position++;
+    case ']':
+      position++;
       return {TokenType::RBracket, "]"};
-    case ',':position++;
+    case ',':
+      position++;
       return {TokenType::Comma, ","};
-    case '{':position++;
+    case '{':
+      position++;
       return {TokenType::CurlyLBracket, "{"};
-    case '}':position++;
+    case '}':
+      position++;
       return {TokenType::CurlyRBracket, "}"};
-    default:throw std::runtime_error("Unexpected character: " + std::string(1, current));
+    default:
+      throw std::runtime_error("Unexpected character: " + std::string(1, current));
   }
 }
 
@@ -78,12 +93,24 @@ Token Lexer::parseIdentifierOrKeyword() {
 
   std::string value = input.substr(start, position - start);
 
+  if (value == "def") {
+    return {TokenType::Def, value};
+  }
+
+  if (value == "return") {
+    return {TokenType::Return, value};
+  }
+
   if (value == "print") {
     return {TokenType::Print, value};
   }
 
   if (value == "true" || value == "false") {
     return {TokenType::Boolean, value};
+  }
+
+  if (value == "jawohl") {
+    return {TokenType::Jawohl, value};
   }
 
   if (value == "int" || value == "bool") {

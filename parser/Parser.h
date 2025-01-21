@@ -14,7 +14,6 @@ class Parser {
  public:
   explicit Parser(const std::string& input);
 
-  // Основной метод для парсинга входной строки и возвращения AST-узлов
   std::vector<std::unique_ptr<ASTNode>> parse();
 
  private:
@@ -48,6 +47,14 @@ class Parser {
   ASTNode* parseFor();
 
   ASTNode* parseIf();
+
+  ASTNode* parseFunction();
+
+  std::vector<std::string> parsesFunctionArguments();
+
+  ASTNode* parseReturn();
+
+  ASTNode* parseCallFunction(std::string name);
 };
 
 #endif // PARSER_H

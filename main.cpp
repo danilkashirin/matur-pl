@@ -4,11 +4,21 @@
 #include "llvm-backend/JITExecutor.h"
 #include "llvm-backend/IRGeneratorV2.h"
 #include "parser/Parser.h"
-#include "vm/LlvmParser.h"
+#include "ASTToBytecodeConverter.h"
+#include "VirtualMachine.h"
 
 int main(int argc, char* argv[]) {
+  if (argc < 2) {
+    std::cerr << "Usage: " << argv[0] << " <source file>" << std::endl;
+    return 1;
+  }
 
   std::ifstream file(argv[1]);
+  if (!file) {
+    std::cerr << "Error: File " << argv[1] << " not found!" << std::endl;
+    return 1;
+  }
+
   std::stringstream input_buffer;
   input_buffer << file.rdbuf();
   std::string code = input_buffer.str();
@@ -17,8 +27,10 @@ int main(int argc, char* argv[]) {
   Parser parser(code);
   auto ast = parser.parse();
 
-  llvm::LLVMContext context;
-  auto module = generateModuleIR(ast, context, (argc >= 3));
+  auto bytecode = ASTToBytecodeConverter::generateBytecode(ast, argv[1]);
 
-  executeIR(module);
+  VirtualMachine vm;
+  vm.execute(bytecode);
+
+  return 0;
 }

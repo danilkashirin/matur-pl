@@ -26,19 +26,31 @@ class ArithmeticOpNode : public ASTNode {
   [[nodiscard]] ASTNode* getRight() const { return right_; }
   [[nodiscard]] Operator getOperator() const { return op_; }
 
-std::vector<std::string> getVariableNames() override {
-    assert(this->left_ != nullptr);
-    assert(this->right_ != nullptr);
-    std::vector<std::string> left_names = this->left_->getVariableNames();
-    std::vector<std::string> right_names = this->right_->getVariableNames();
-    std::vector<std::string> values(left_names.size() + right_names.size());
-    for (std::size_t i = 0; i < left_names.size(); ++i) {
-        values[i] = left_names[i];
+  std::vector<std::tuple<std::string, std::vector<int64_t>>> generateBytecode(size_t currentOffset) const override {
+    std::vector<std::tuple<std::string, std::vector<int64_t>>> bytecode;
+
+    auto leftBytecode = left_->generateBytecode(currentOffset);
+    currentOffset += leftBytecode.size();
+    auto rightBytecode = right_->generateBytecode(currentOffset);
+    currentOffset += rightBytecode.size();
+
+    bytecode.insert(bytecode.end(), leftBytecode.begin(), leftBytecode.end());
+    bytecode.insert(bytecode.end(), rightBytecode.begin(), rightBytecode.end());
+
+    switch (op_) {
+      case Operator::ADD: bytecode.emplace_back("ADD", std::vector<int64_t>());
+        break;
+      case Operator::SUBTRACT: bytecode.emplace_back("SUBTRACT", std::vector<int64_t>());
+        break;
+      case Operator::MULTIPLY: bytecode.emplace_back("MULTIPLY", std::vector<int64_t>());
+        break;
+      case Operator::DIVIDE: bytecode.emplace_back("DIVIDE", std::vector<int64_t>());
+        break;
+      case Operator::MODULO: bytecode.emplace_back("MODULO", std::vector<int64_t>());
+        break;
     }
-    for (std::size_t i = left_names.size(); i < left_names.size() + right_names.size(); ++i) {
-        values[i] = right_names[i];
-    }
-    return values;
+
+    return bytecode;
   }
 
  private:

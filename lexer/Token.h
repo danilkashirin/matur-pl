@@ -34,7 +34,10 @@ enum class TokenType {
   CurlyRBracket,
   If,
   Else,
-  Random
+  Random,
+  Def,
+  Return,
+  Jawohl,
 };
 
 struct Token {

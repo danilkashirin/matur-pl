@@ -26,19 +26,31 @@ class CompareOpNode : public ASTNode {
   [[nodiscard]] ASTNode* getRight() const { return right_; }
   [[nodiscard]] Operator getOperator() const { return op_; }
 
-  std::vector<std::string> getVariableNames() override {
-    assert(this->left_ != nullptr);
-    assert(this->right_ != nullptr);
-    std::vector<std::string> lhs_names = this->left_->getVariableNames();
-    std::vector<std::string> rhs_names = this->right_->getVariableNames();
-    std::vector<std::string> values(lhs_names.size() + rhs_names.size());
-    for (std::size_t i = 0; i < lhs_names.size(); ++i) {
-        values[i] = lhs_names[i];
+  std::vector<std::tuple<std::string, std::vector<int64_t>>> generateBytecode(size_t currentOffset) const override {
+    std::vector<std::tuple<std::string, std::vector<int64_t>>> bytecode;
+
+    auto leftBytecode = left_->generateBytecode(currentOffset);
+    currentOffset += leftBytecode.size();
+    auto rightBytecode = right_->generateBytecode(currentOffset);
+    currentOffset += rightBytecode.size();
+
+    bytecode.insert(bytecode.end(), leftBytecode.begin(), leftBytecode.end());
+    bytecode.insert(bytecode.end(), rightBytecode.begin(), rightBytecode.end());
+
+    switch (op_) {
+      case Operator::LESS_THAN: bytecode.emplace_back("LESS_THAN", std::vector<int64_t>());
+        break;
+      case Operator::GREATER_THAN: bytecode.emplace_back("GREATER_THAN", std::vector<int64_t>());
+        break;
+      case Operator::LESS_THAN_OR_EQUAL: bytecode.emplace_back("LESS_THAN_OR_EQUAL", std::vector<int64_t>());
+        break;
+      case Operator::GREATER_THAN_OR_EQUAL: bytecode.emplace_back("GREATER_THAN_OR_EQUAL", std::vector<int64_t>());
+        break;
+      case Operator::EQUALS: bytecode.emplace_back("EQUALS", std::vector<int64_t>());
+        break;
     }
-    for (std::size_t i = lhs_names.size(); i < lhs_names.size() + rhs_names.size(); ++i) {
-        values[i] = rhs_names[i];
-    }
-    return values;
+
+    return bytecode;
   }
 
  private:

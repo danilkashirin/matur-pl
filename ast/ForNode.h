@@ -29,47 +29,54 @@ class ForNode : public ASTNode {
   [[nodiscard]] ASTNode* getStep() const { return step_; }
   [[nodiscard]] const std::vector<std::unique_ptr<ASTNode>>& getBody() const { return body_; }
 
-  std::vector<std::string> getVariableNames() override {
-    assert(this->start_ != nullptr);
-    assert(this->finish_ != nullptr);
-    assert(this->step_ != nullptr);
-    std::vector<std::string> start_names = this->start_->getVariableNames();
-    std::vector<std::string> finish_names = this->finish_->getVariableNames();
-    std::vector<std::string> step_names = this->step_->getVariableNames();
-    std::size_t body_nodes_count = 0;
-    for (auto& body_node : this->body_) {
-        assert(body_node.get() != nullptr);
-        body_nodes_count += body_node->getVariableNames().size();
+  [[nodiscard]] std::vector<std::tuple<std::string, std::vector<int64_t>>> generateBytecode(size_t currentOffset) const override {
+    std::vector<std::tuple<std::string, std::vector<int64_t>>> bytecode;
+
+    auto startBytecode = getStart()->generateBytecode(currentOffset);
+    bytecode.insert(bytecode.end(), startBytecode.begin(), startBytecode.end());
+
+    std::vector<int64_t> operands;
+    operands.push_back(static_cast<int64_t>(getIteratorName().size()));
+    for (char c : getIteratorName()) {
+      operands.push_back(static_cast<int64_t>(c));
     }
-    std::vector<std::string> values(
-        start_names.size()
-        + finish_names.size()
-        + step_names.size()
-        + body_nodes_count
-    );
-    std::size_t i = 0;
-    while (i < start_names.size()) {
-        values[i] = start_names[i];
-        ++i;
+
+    bytecode.emplace_back("DECLARE_VAR", operands);
+
+    size_t loopStartOffset = currentOffset + bytecode.size();
+
+    bytecode.emplace_back("LOAD_VAR", operands);
+    auto finishBytecode = getFinish()->generateBytecode(currentOffset + bytecode.size());
+    bytecode.insert(bytecode.end(), finishBytecode.begin(), finishBytecode.end());
+    bytecode.emplace_back("LESS_THAN", std::vector<int64_t>{});
+
+    size_t jumpToEndIndex = bytecode.size();
+    bytecode.emplace_back("JUMP_IF_FALSE", std::vector<int64_t>{0});
+
+    size_t bodyOffset = currentOffset + bytecode.size();
+    for (const auto& stmt : getBody()) {
+      auto bodyBytecode = stmt->generateBytecode(bodyOffset);
+      bodyOffset += bodyBytecode.size();
+      bytecode.insert(bytecode.end(), bodyBytecode.begin(), bodyBytecode.end());
     }
-    while (i < start_names.size() + finish_names.size()) {
-        values[i] = finish_names[i];
-        ++i;
+
+    bytecode.emplace_back("LOAD_VAR", operands);
+    if (getStep()) {
+      auto stepBytecode = getStep()->generateBytecode(currentOffset + bytecode.size());
+      bytecode.insert(bytecode.end(), stepBytecode.begin(), stepBytecode.end());
+    } else {
+      bytecode.emplace_back("LOAD_CONST", std::vector<int64_t>{1});
     }
-    while (i < values.size() - body_nodes_count) {
-        values[i] = step_names[i];
-        ++i;
-    }
-    for (auto& body_node : this->body_) {
-        assert(body_node.get() != nullptr);
-        for (std::string name : body_node->getVariableNames()) {
-            values[i] = name;
-        }
-    }
-    return values;
+    bytecode.emplace_back("ADD", std::vector<int64_t>{});
+    bytecode.emplace_back("ASSIGN_VAR", operands);
+
+    bytecode.emplace_back("JUMP", std::vector<int64_t>{static_cast<int64_t>(loopStartOffset)});
+
+    size_t loopEndOffset = currentOffset + bytecode.size();
+    std::get<1>(bytecode[jumpToEndIndex])[0] = static_cast<int64_t>(loopEndOffset);
+
+    return bytecode;
   }
-
-
  private:
   std::string iteratorName_;
   ASTNode* start_;
